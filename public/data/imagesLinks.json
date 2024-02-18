@@ -1,0 +1,69 @@
+[
+    {
+      "id":"Brushes",
+      "link":"https://i.ibb.co/p26D0Wt/c81b5db5-9c7c-448a-842e-c8387a5626a3.jpg",
+      "link_1": "https://i.ibb.co/p26D0Wt/c81b5db5-9c7c-448a-842e-c8387a5626a3.jpg",
+      "link_2":"",
+      "animation": "zoomIn", 
+      "aspect":"square",
+      "text":"Photographer"
+    },
+    {
+      "id": "doll",
+      "link": "https://i.ibb.co/bXwyC6v/doll.png",
+      "link_1": "https://i.ibb.co/bXwyC6v/doll.png",
+      "link_2":"",
+      "aspect": "circle",
+      "text": "",
+      "animation": "bounceIn"
+    },
+    {
+      "id": "Painting",
+      "name": "woman-painting",
+      "link": "https://i.ibb.co/rwzDWDm/woman-painting.jpg",
+      "link_1": "https://i.ibb.co/rwzDWDm/woman-painting.jpg",
+      "link_2":"",
+      "animation": "zoomIn", 
+      "aspect":"circle",
+      "text":"Artist"
+    },
+    {
+      "id": "Hand",
+      "name": "hands-on-painting",
+      "link": "https://i.ibb.co/d5f3Xxh/Untitled-design.png",
+      "link_1": "https://i.ibb.co/d5f3Xxh/Untitled-design.png",
+      "link_2":"",
+
+      "aspect":"circle",
+      "text":"Painter",
+      "animation": "fadeIn"
+    },
+    {
+      "id": "camera",
+      "link": "https://i.ibb.co/R0wjyP5/camera.png",
+      "link_1": "https://i.ibb.co/R0wjyP5/camera.png",
+      "link_2":"",
+      "aspect": "circle",
+      "text": "Photographer",
+      "animation": "fadeIn"
+    },
+   
+    {
+      "id": "grey-orange-flowers",
+      "link": "https://i.ibb.co/60tVs3M/grey-orange-flowers.png",
+      "link_1": "https://i.ibb.co/60tVs3M/grey-orange-flowers.png",
+      "link_2":"",
+      "aspect": "circle",
+      "text": "Artist",
+      "animation": "rotateIn"
+    },
+    {
+      "id": "main",
+      "link": "https://i.ibb.co/VjRZwGC/main.jpg",
+      "link_1": "https://i.ibb.co/VjRZwGC/main.jpg",
+      "link_2":"",
+      "aspect": "circle",
+      "animation": "rotateIn"
+    }
+  ]
+
