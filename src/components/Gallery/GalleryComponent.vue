@@ -1,11 +1,11 @@
 <template>
   <div>
     <GalleryNav />
-    <div class="gallery-arrows">
-      <img class="prev" src="https://img.icons8.com/ios-filled/50/000000/arrow.png" alt="Previous arrow" @click="prevPage"/>
-      <img class="next" src="https://img.icons8.com/ios-filled/50/000000/arrow.png" alt="Next arrow" @click="nextPage"/>
-    </div>
     <div :class="['GalleryContainer',`GalleryContainer_page_${currentPage}`]">
+      <div class="arrowContainer">
+        <img class="prev bttn" src="../../../public/images/icons/arrows/left-big.png" alt="Previous arrow" @click="prevPage"/>
+      </div>
+      <div class="gallery">
       <template v-for="(rowItems, rowIndex) in paginatedItems" :key="rowIndex">
         <div :class="[`page_${currentPage}_row_${rowIndex + 1}`,'GalleryRow']">
           <template v-for="(item, itemIndex) in rowItems" :key="itemIndex">
@@ -15,6 +15,10 @@
           </template>
         </div>
       </template>
+    </div>
+      <div class="arrowContainer">
+        <img class="next bttn" src="../../../public/images/icons/arrows/right-big.png" alt="Next arrow" @click="nextPage"/>
+      </div>
     </div>
   </div>
 </template>
@@ -65,38 +69,58 @@ export default {
 </script>
 
 <style scoped>
-.gallery-arrows {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.prev,
-.next {
-  width: 50px; /* Adjust as needed */
-  height: 50px; /* Adjust as needed */
-  cursor: pointer;
-}
 
 .GalleryContainer {
   display: flex;
   align-items: flex-start;
-  justify-content: center;
-  width: 80%;
+  width: 100%;
   min-height: fit-content;
-  margin: 0 auto;
+  height:100vh;
   row-gap: 0;
 }
 
+.gallery{
+  display: flex;
+  justify-content: center;
+  width:100%
+}
+
+.page_1_row_1{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    width:55%;
+    justify-content: flex-end;
+    margin-right: 2vw;
+}
+.page_1_row_2{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    justify-content: center;
+}
 .GalleryRow {
   margin-bottom: 20px; /* Add some space between rows */
 }
 
-.image {
-  width: 100%; /* Make the image fill the item container */
-  height: auto; /* Maintain aspect ratio */
+.arrowContainer {
+  display: flex;
+  height:100%;
+  flex-direction: column;
+  justify-content: center;
 }
 
+.bttn{
+  cursor: pointer;
+}
+
+.prev{
+  margin-left:2vw;
+}
+
+.next{
+  margin-right:2vw;
+}
 .square {
   height: 22vw;
   width: 22vw;
@@ -112,11 +136,4 @@ export default {
   width: 44vw;
 }
 
-.page_1_row_1{
-    width:60%;
-    display:flex;
-    flex-wrap:wrap;
-    justify-content: center;
-    gap:20px;
-}
 </style>
