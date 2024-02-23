@@ -2,10 +2,12 @@
   <div>
     <GalleryNav />
     <div class="gallery-arrows">
-      <img class="prev" src="https://img.icons8.com/ios-filled/50/000000/arrow.png" alt="Previous arrow" @click="prevPage"/>
-      <img class="next" src="https://img.icons8.com/ios-filled/50/000000/arrow.png" alt="Next arrow" @click="nextPage"/>
+      
     </div>
     <div :class="['GalleryContainer',`GalleryContainer_page_${currentPage}`]">
+      <div class="ArrowContainer">
+        <img class="prev bttn" src="../../../public/images/icons/arrows/left-big.png" alt="Previous arrow" @click="prevPage"/>
+      </div>
       <template v-for="(rowItems, rowIndex) in paginatedItems" :key="rowIndex">
         <div :class="[`page_${currentPage}_row_${rowIndex + 1}`,'GalleryRow']">
           <template v-for="(item, itemIndex) in rowItems" :key="itemIndex">
@@ -15,6 +17,9 @@
           </template>
         </div>
       </template>
+      <div class="ArrowContainer">
+        <img class="next bttn" src="../../../public/images/icons/arrows/right-big.png" alt="Next arrow" @click="nextPage"/>
+      </div>
     </div>
   </div>
 </template>
@@ -65,19 +70,31 @@ export default {
 </script>
 
 <style scoped>
+  /* adjust this to work on different sizes */
 .gallery-arrows {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.prev,
-.next {
-  width: 50px; /* Adjust as needed */
-  height: 50px; /* Adjust as needed */
+.bttn{
+  width: 100px; 
+  height: 100px; 
   cursor: pointer;
 }
 
+.prev {
+}
+
+.next {
+}
+
+.ArrowContainer{
+  display: flex;
+  height:100%;
+  align-items: center;
+  justify-content: center;
+}
 .GalleryContainer {
   display: flex;
   align-items: flex-start;
