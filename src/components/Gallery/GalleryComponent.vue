@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="everything">
     <GalleryNav />
     <ImageModal v-if="showModal" :data="modalData" :funcs="{ close : this.closeModal}" />
     <div :class="['GalleryContainer']">
@@ -220,5 +220,9 @@ export default {
 
 .modal-open {
   overflow: hidden !important;
+}
+
+.everything{
+  background-color: #EFE9E4;
 }
 </style>
