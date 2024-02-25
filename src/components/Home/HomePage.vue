@@ -17,7 +17,9 @@
 </template>
 
 <script>
-import Navbar from '../General/HomeNavbar.vue'
+// import Navbar from '../General/HomeNavbar.vue'
+import Navbar from '../General/example.vue'
+
 
 export default {
   name: 'HelloWorld',

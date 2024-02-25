@@ -28,6 +28,7 @@
 import ImageStructure from '../../../public/data/GalleryImageStructure.json';
 import { convertArrays, disableScroll, enableScroll } from '../../utils/utilFuncs.js';
 
+
 import 'animate.css';
 
 import GalleryNav from './GalleryNav.vue';
