@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav :class="['animate__animated',animation,navbarStyle]">
     <ul>
       <li><router-link :to="{ name: 'home' }">Home</router-link></li>
       <li><router-link :to="{ name: 'about' }">About</router-link></li>
@@ -10,9 +10,40 @@
 </template>
 
 <script>
+import 'animate.css';
+
 export default {
-  name: 'MainNavbar',
+name: 'MainNavbar',
+mounted() {
+// Add event listener for scroll event when the component is mounted
+    window.addEventListener('scroll', this.handleScroll);
+},
+beforeUnmount() {
+    // Remove event listener when the component is destroyed to prevent memory leaks
+    window.removeEventListener('scroll', this.handleScroll);
+},
+methods: {
+  handleScroll() {
+    const distanceFromTop = window.scrollY || window.pageYOffset;
+
+    const vhToPixel = value => (value * window.innerHeight) / 100;
+    // Now you can use these values as thresholds
+    if (distanceFromTop > vhToPixel(5)) {
+      this.animation = 'animate__fadeOut';
+    }
+    if (distanceFromTop === vhToPixel(0)) {
+      this.animation = 'animate__fadeIn';
+    }
+  }
+},
+data(){
+  return {
+    animation: null,
+    navbarStyle : null,
+  }
 }
+}
+
 </script>
 
 <style scoped>
@@ -22,6 +53,26 @@ nav {
   font-family: 'Comfortaa', sans-serif;
   padding-top: 20px;
   width: fit-content;
+  position: fixed;
+  
+  animation-duration: 0.5s;
+}
+
+.navbarStyle_1{
+  position:absolute;
+  left:30vw;
+  top:90vh;
+}
+
+.navbarStyle_2{
+  left:30vw;
+  top:14vh;
+  position: fixed;
+
+  background-color: #EFE9E4; 
+  padding-top: 0;
+  padding-left: 1vw;
+
 }
 
 ul {

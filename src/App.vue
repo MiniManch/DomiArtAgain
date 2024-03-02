@@ -1,25 +1,10 @@
 <template>
-  <HomePage/>
-  <Gallery :data="data"/>
+  <router-view></router-view>
 </template>
 
 <script>
-import Gallery from "./components/Gallery/GalleryComponent.vue";
-import HomePage from "./components/Home/HomePage.vue";
-
-import data from "../public/data/GalleryImages.json";
-
 export default {
   name: 'App',
-  data(){
-    return{
-      data: data
-    }
-  },
-  components: {
-    Gallery,
-    HomePage
-  },
 }
 </script>
 

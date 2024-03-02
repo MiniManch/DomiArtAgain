@@ -1,21 +1,17 @@
-// Import Vue and Vue Router
 import { createRouter, createWebHistory } from 'vue-router';
+import Home from '../components/Home/Home.vue';
+import GalleryItem from '../components/Gallery/GalleryItem.vue'; // Assuming you have a component for painting details
 
-// Import your components
-import HomePage from '../components/Home/HomePage.vue';
-
-// Define your routes
 const routes = [
-    { path: '/', component: HomePage, name:'home' },
-    { path: '/gallery', component: HomePage, name:'gallery' },
-    { path: '/about', component: HomePage, name:'about' },
-    { path: '/contact', component: HomePage, name:'contact'},
+    { path: '/', component: Home},
+    { path: '/painting/:id', component: GalleryItem, name: 'painting-detail' } 
 ];
 
-// Create the router instance
 const router = createRouter({
     history: createWebHistory(),
     routes
 });
+
+console.log(Home)
 
 export default router;

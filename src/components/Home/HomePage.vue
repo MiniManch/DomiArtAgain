@@ -18,7 +18,7 @@
 
 <script>
 // import Navbar from '../General/HomeNavbar.vue'
-import Navbar from '../General/example.vue'
+import Navbar from '../General/HomeNavbar.vue'
 
 
 export default {
@@ -34,15 +34,11 @@ export default {
 
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
-@font-face {
-  font-family: 'MondayRain';
-  src: url('../../../public/fonts/MondayRain.ttf') format('truetype');
-}
 .home-container{
   display:flex;
   justify-content: space-between;
   width: calc(100% - 10vh); /* Margin from both sides */
-  height:100vh; /* Adjusted to full height */
+  height:100vh;
 }
 .left-side{
   width:fit-content;
@@ -63,6 +59,7 @@ export default {
 .title {
   font-size: 12vh;
   margin-bottom:0;
+  margin-top: 7vh;
 
   font-weight:400;
   width:fit-content;

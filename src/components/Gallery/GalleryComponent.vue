@@ -1,7 +1,7 @@
 <template>
   <div class="everything">
+    <MainNavbar />
     <GalleryNav />
-    <ImageModal v-if="showModal" :data="modalData" :funcs="{ close : this.closeModal}" />
     <div :class="['GalleryContainer']">
       <div class="arrowContainer" >
         <img class="prev bttn" src="../../../public/images/icons/arrows/left-big.png" alt="Previous arrow" @click="prevPage" :disabled="animating"/>
@@ -11,7 +11,7 @@
         <div :class="[`page_${currentPage}_row_${rowIndex + 1}`,'GalleryRow']">
           <template v-for="(item, itemIndex) in rowItems" :key="itemIndex">
             <div :class="`item_${item.id}`" class="item" >
-              <img :class="['image', item.aspect]" :src="item.link_1" alt="Gallery Image"  @click="openModal(item)" />
+              <img :class="['image', item.aspect]" :src="item.link_1" alt="Gallery Image" @click="openImage(item.id)"/>
             </div>
           </template>
         </div>
@@ -26,13 +26,16 @@
 
 <script>
 import ImageStructure from '../../../public/data/GalleryImageStructure.json';
-import { convertArrays, disableScroll, enableScroll } from '../../utils/utilFuncs.js';
+import {convertArrays} from '../../utils/utilFuncs.js';
+
+// import { convertArrays, disableScroll, enableScroll } from '../../utils/utilFuncs.js';
+
 
 
 import 'animate.css';
 
 import GalleryNav from './GalleryNav.vue';
-import ImageModal from './ImageModal.vue';
+import MainNavbar from '../General/MainNavbar.vue';
 
 export default {
   data() {
@@ -68,6 +71,9 @@ export default {
   },
 
   methods:{
+    openImage(paintingId){
+      this.$router.push({ name: 'painting-detail', params: { id: paintingId } });
+     },
     nextPage(){
       if(this.currentPage == this.maxPage) return
       this.animateGallery('forward');
@@ -99,22 +105,11 @@ export default {
         }, this.animation_duration * 2);
       }
     },
-    openModal(data){
-      this.showModal = true;
-      this.modalData = data;
-      document.body.classList.add('modal-open');
-      disableScroll();
-    },
-    closeModal(){
-      this.showModal = false;
-      this.modalData = null;
-      enableScroll();
-    }
   },
 
   components:{
     GalleryNav,
-    ImageModal
+    MainNavbar
   }
 };
 </script>
@@ -218,11 +213,6 @@ export default {
   height: 22vw;
   width: 44vw;
 }
-
-.modal-open {
-  overflow: hidden !important;
-}
-
 .everything{
   background-color: #EFE9E4;
 }
