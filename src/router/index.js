@@ -3,7 +3,10 @@ import Home from '../components/Home/Home.vue';
 import GalleryItem from '../components/Gallery/GalleryItem.vue'; // Assuming you have a component for painting details
 
 const routes = [
-    { path: '/', component: Home},
+    { path: '/', component: Home,name: 'home'},
+    { path: '/about', component: Home,name: 'about'},
+    { path: '/contact', component: Home,name: 'contact'},
+    { path: '/gallery', component: Home,name: 'gallery'},
     { path: '/painting/:id', component: GalleryItem, name: 'painting-detail' } 
 ];
 
