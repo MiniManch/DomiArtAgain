@@ -57,21 +57,3 @@ export function enableScroll() {
   window.removeEventListener('touchmove', preventDefault, wheelOpt);
   window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
 }
-
-
-export function getItemData(url,id){
-  fetch(url)
-  .then((response) => response.json())
-  .then((json) => {
-      const item = json.find(item => item.id == id);
-      console.log(item,'item')
-      if (item) {
-          return item;
-      } else {
-          console.error(`Item with ID ${this.itemId} not found.`);
-      }
-  })
-  .catch((error) => {
-      console.error('Error fetching GalleryImages.json:', error);
-  });
-}
