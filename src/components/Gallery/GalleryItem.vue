@@ -1,4 +1,5 @@
 <template>
+      <GalleryItemModal v-if="this.displayModal" @close="openOtherImage" :data="this.itemData"/>
   <div v-if="this.itemData" class="total-wrapper">
       <div class="image">
         <img :src="this.itemData.link_1" alt="" :class="[this.itemData.aspect]">
@@ -8,21 +9,28 @@
         <h1 class="title">{{ this.itemData.title }}</h1>
         <h3 class="year">{{ this.itemData.year }}</h3>
         <h2 class="text">{{ this.itemData.text }}</h2>
+
+        <img :src="this.itemData.link_2" alt="" class="other_image" @click="openOtherImage()" >
+
       </div>
   </div>
 </template>
 <script>
 import 'animate.css';
 import NavBar from '../General/MainNavbar.vue';
+import GalleryItemModal from './GalleryItemModal.vue';
+
 export default {
   name: 'GalleryItem',
   components:{
     NavBar,
+    GalleryItemModal
   },
   data() {
     return {
       itemId: null,
-      itemData: null
+      itemData: null,
+      displayModal:false
     }
   },
   mounted() {
@@ -44,6 +52,9 @@ export default {
         .catch((error) => {
           console.error('Error fetching GalleryImages.json:', error);
         });
+    },
+    openOtherImage(){
+      this.displayModal = true;
     }
   }
 }
@@ -90,5 +101,25 @@ export default {
 .image > img{
   max-height:90%;
   margin-top:5%;
+}
+
+.horizontal{
+  width:100%;
+}
+
+.other_image{
+  width:10vh;
+  height:10vh;
+
+  align-self: center;
+
+  margin-top: 2vh;
+  opacity: 0.6;
+  
+  transition: all 0.5s;
+}
+
+.other_image:hover{
+  opacity:1;
 }
 </style>
