@@ -1,6 +1,6 @@
 <template>
-  <nav v-if="displayComponent" :class="['animate__animated',animation,'navbarStyle']">
-    <ul>
+  <nav v-if="displayComponent" :class="['animate__animated',animation,'navbarStyle',fixedStyle]">
+    <ul :class="[ulFixedStyle]">
       <li><router-link :to="{ name: 'home' }">Home</router-link></li>
       <li><router-link :to="{ name: 'about' }">About</router-link></li>
       <li><router-link :to="{ name: 'gallery' }">Gallery</router-link></li>
@@ -15,32 +15,43 @@
   export default {
   name: 'MainNavbar',
   mounted() {
-  // Add event listener for scroll event when the component is mounted
       window.addEventListener('scroll', this.handleScroll);
   },
   beforeUnmount() {
-      // Remove event listener when the component is destroyed to prevent memory leaks
       window.removeEventListener('scroll', this.handleScroll);
   },
   methods: {
+    vhToPixel(value){
+      return (value * window.innerHeight) / 100;
+    },
     handleScroll() {
       const distanceFromTop = window.scrollY || window.pageYOffset;
 
-      const vhToPixel = value => (value * window.innerHeight) / 100;
       // Now you can use these values as thresholds
-      if (vhToPixel(40) < distanceFromTop){
+      if (this.vhToPixel(40) < distanceFromTop){
         this.displayComponent = true;
         this.animation = 'animate__fadeIn';
+        this.fixedStyle = null;
+        this.ulFixedStyle = null;
+
       }
-      if (vhToPixel(40) > distanceFromTop){
+      if (this.vhToPixel(90) < distanceFromTop){
+          this.fixedStyle = 'fixedStyle';
+          this.ulFixedStyle = 'ulFixedStyle';
+      }
+
+      if (this.vhToPixel(40) > distanceFromTop){
         this.animation = 'animate__fadeOut';
+        this.fixedStyle = null;
       }
     }
   },
   data(){
     return {
       animation: null,
-      displayComponent: false
+      displayComponent: false,
+      fixedStyle:null,
+      ulFixedStyle :null
     }
   }
 }
@@ -53,14 +64,13 @@ nav {
   font-family: 'Comfortaa', sans-serif;
   padding-top: 20px;
   width: fit-content;
-  position: fixed;
+  position: absolute;
   
   animation-duration: 0.5s;
 }
 
 .navbarStyle{
-  position:absolute;
-  left:30vw;
+  left:40vw;
   top:92vh;
 }
 
@@ -95,5 +105,19 @@ a::after {
 a:hover::after {
   width: 100%;
   left: 50%; 
+}
+
+.fixedStyle{
+  position: fixed;
+  left:0 !important;
+  top:0vh;
+
+  background-color: #EFE9E4;
+}
+
+.ulFixedStyle{
+  width:100vw;
+
+
 }
 </style>

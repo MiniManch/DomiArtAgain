@@ -1,19 +1,20 @@
 <template>
-      <GalleryItemModal v-if="this.displayModal" @close="openOtherImage" :data="this.itemData"/>
-  <div v-if="this.itemData" class="total-wrapper">
-      <div class="image">
-        <img :src="this.itemData.link_1" alt="" :class="[this.itemData.aspect]">
-      </div>
-      <div class="info">
-        <NavBar />
-        <h1 class="title">{{ this.itemData.title }}</h1>
-        <h3 class="year">{{ this.itemData.year }}</h3>
-        <h2 class="text">{{ this.itemData.text }}</h2>
+    <GalleryItemModal v-if="this.displayModal" @close="openOtherImage" :data="this.itemData"/>
+    <div v-if="this.itemData" class="total-wrapper">
 
-        <img :src="this.itemData.link_2" alt="" class="other_image" @click="openOtherImage()" >
+        <div class="image">
+            <img :src="this.itemData.link_1" alt="" :class="[this.itemData.aspect]">
+        </div>
+        <div class="info">
+            <NavBar />
+            <h1 class="title">{{ this.itemData.title }}</h1>
+            <h3 class="year">{{ this.itemData.year }}</h3>
+            <h2 class="text">{{ this.itemData.text }}</h2>
 
-      </div>
-  </div>
+            <img :src="this.itemData.link_2" alt="" class="other_image" @click="openOtherImage()" >
+
+        </div>
+    </div>
 </template>
 <script>
 import 'animate.css';
@@ -54,7 +55,7 @@ export default {
         });
     },
     openOtherImage(){
-      this.displayModal = true;
+      this.displayModal = !this.displayModal;
     }
   }
 }
@@ -80,6 +81,10 @@ export default {
   height:100%;
 }
 
+.square{
+    width:80%;
+    height:80%;
+}
 .info{
   width:40%;
   height:100%;
@@ -117,6 +122,8 @@ export default {
   opacity: 0.6;
   
   transition: all 0.5s;
+  cursor: pointer; 
+
 }
 
 .other_image:hover{

@@ -28,10 +28,6 @@
 import ImageStructure from '../../../public/data/GalleryImageStructure.json';
 import {convertArrays} from '../../utils/utilFuncs.js';
 
-// import { convertArrays, disableScroll, enableScroll } from '../../utils/utilFuncs.js';
-
-
-
 import 'animate.css';
 
 import GalleryNav from './GalleryNav.vue';
@@ -212,6 +208,9 @@ export default {
 .horizontal {
   height: 22vw;
   width: 44vw;
+}
+.image{
+  cursor: pointer; 
 }
 .everything{
   background-color: #EFE9E4;
