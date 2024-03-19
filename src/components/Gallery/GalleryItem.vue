@@ -2,7 +2,7 @@
     <GalleryItemModal v-if="this.displayModal" @close="openOtherImage" :data="this.itemData"/>
     <div v-if="this.itemData" class="total-wrapper">
 
-        <div class="image">
+        <div :class="['image',this.itemData.aspect]">
             <img :src="this.itemData.link_1" alt="" :class="[this.itemData.aspect]">
         </div>
         <div class="info">
@@ -18,7 +18,7 @@
 </template>
 <script>
 import 'animate.css';
-import NavBar from '../General/MainNavbar.vue';
+import NavBar from '../General/GalleryItemNavbar.vue';
 import GalleryItemModal from './GalleryItemModal.vue';
 
 export default {
@@ -85,6 +85,7 @@ export default {
     width:80%;
     height:80%;
 }
+
 .info{
   width:40%;
   height:100%;
@@ -108,8 +109,12 @@ export default {
   margin-top:5%;
 }
 
-.horizontal{
+img.horizontal{
   width:100%;
+}
+
+.image.horizontal{
+  margin-top: 10vh;
 }
 
 .other_image{
