@@ -3,20 +3,20 @@
     <MainNavbar />
     <GalleryNav />
     <div :class="['GalleryContainer']">
-      <div class="arrowContainer" >
+      <div class="arrowContainer">
         <img class="prev bttn" src="../../../public/images/icons/arrows/left-big.png" alt="Previous arrow" @click="prevPage" :disabled="animating"/>
       </div>
       <div :class="['gallery',`gallery_page_${currentPage}`,'animate__animated',animating ? animation : null]">
-      <template v-for="(rowItems, rowIndex) in paginatedItems" :key="rowIndex">
-        <div :class="[`page_${currentPage}_row_${rowIndex + 1}`,'GalleryRow']">
-          <template v-for="(item, itemIndex) in rowItems" :key="itemIndex">
-            <div :class="`item_${item.id}`" class="item" >
-              <img :class="['image', item.aspect]" :src="item.link_1" alt="Gallery Image" @click="openImage(item.id)"/>
-            </div>
-          </template>
-        </div>
-      </template>
-    </div>
+        <template v-for="(rowItems, rowIndex) in paginatedItems" :key="rowIndex">
+          <div :class="[`page_${currentPage}_row_${rowIndex + 1}`,'GalleryRow']">
+            <template v-for="(item, itemIndex) in rowItems" :key="itemIndex">
+              <div :class="`item_${item.id}`" class="item">
+                <img :class="['image', item.aspect]" :src="item.link_1" alt="Gallery Image" @click="openImage(item.id)" @load="imageLoaded(item)">
+              </div>
+            </template>
+          </div>
+        </template>
+      </div>
       <div class="arrowContainer">
         <img class="next bttn" src="../../../public/images/icons/arrows/right-big.png" alt="Next arrow" @click="nextPage" />
       </div>
@@ -26,7 +26,7 @@
 
 <script>
 import ImageStructure from '../../../public/data/GalleryImageStructure.json';
-import {convertArrays} from '../../utils/utilFuncs.js';
+import { convertArrays } from '../../utils/utilFuncs.js';
 
 import 'animate.css';
 
@@ -41,10 +41,10 @@ export default {
       animating: false,
       animation: null,
       animation_duration: 1000,
-      maxPage:3,
-      minPage:1,
-      showModal:false,
-      modalData:null
+      maxPage: 3,
+      minPage: 1,
+      showModal: false,
+      modalData: null
     }
   },
 
@@ -66,16 +66,16 @@ export default {
     },
   },
 
-  methods:{
-    openImage(paintingId){
+  methods: {
+    openImage(paintingId) {
       this.$router.push({ name: 'painting-detail', params: { id: paintingId } });
-     },
-    nextPage(){
-      if(this.currentPage == this.maxPage) return
+    },
+    nextPage() {
+      if (this.currentPage == this.maxPage) return
       this.animateGallery('forward');
     },
-    prevPage(){
-      if(this.currentPage == this.minPage) return
+    prevPage() {
+      if (this.currentPage == this.minPage) return
       this.animateGallery('backward');
     },
     animateGallery(direction) {
@@ -101,9 +101,12 @@ export default {
         }, this.animation_duration * 2);
       }
     },
+    imageLoaded(item) {
+      item.loaded = true; // Set the loaded flag to true when the image is loaded
+    }
   },
 
-  components:{
+  components: {
     GalleryNav,
     MainNavbar
   }
