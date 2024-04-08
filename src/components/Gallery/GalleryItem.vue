@@ -74,6 +74,8 @@ export default {
   display:flex;
   flex-direction:row;
   justify-content: center;
+
+  gap: 2vw;
 }
 
 .image{
@@ -84,6 +86,13 @@ export default {
 .square{
     width:80%;
     height:80%;
+}
+.vertical{
+    height:100%;
+}
+.horizontal{
+  width:80%;
+
 }
 
 .info{

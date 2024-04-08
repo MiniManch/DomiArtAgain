@@ -67,6 +67,8 @@ nav {
   position: absolute;
   
   animation-duration: 0.5s;
+
+  z-index: 5;
 }
 
 .navbarStyle{

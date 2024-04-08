@@ -1,11 +1,13 @@
 <template>
     <HomePage/>
     <Gallery :data="data"/>
+    <Contact />
 </template>
   
   <script>
   import Gallery from "../Gallery/GalleryComponent.vue";
   import HomePage from "./HomePage.vue";
+  import Contact from "../Contact/ContactPage.vue"
   
   import data from "../../../public/data/GalleryImages.json";
   
@@ -18,7 +20,8 @@
     },
     components: {
       Gallery,
-      HomePage
+      HomePage,
+      Contact
     },
   }
   </script>
