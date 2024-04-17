@@ -11,7 +11,7 @@
           <div :class="[`page_${currentPage}_row_${rowIndex + 1}`,'GalleryRow']">
             <template v-for="(item, itemIndex) in rowItems" :key="itemIndex">
               <div :class="`item_${item.id}`" class="item">
-                <img :class="['image', item.aspect]" :src="item.link_1" alt="Gallery Image" @click="openImage(item.id)" @load="imageLoaded(item)">
+                <img :id="`painting_${item.id}`" :class="['image', item.aspect]" :src="item.link_1" alt="Gallery Image" @click="openImage(item.id)" @load="imageLoaded(item)">
               </div>
             </template>
           </div>
@@ -26,7 +26,7 @@
 
 <script>
 import ImageStructure from '../../../public/data/GalleryImageStructure.json';
-import { convertArrays } from '../../utils/utilFuncs.js';
+import { convertArrays, arraysHaveSameItems } from '../../utils/utilFuncs.js';
 
 import 'animate.css';
 
@@ -44,7 +44,9 @@ export default {
       maxPage: 3,
       minPage: 1,
       showModal: false,
-      modalData: null
+      modalData: null,
+      loadedImages:[],
+      loading: false,
     }
   },
 
@@ -72,11 +74,28 @@ export default {
     },
     nextPage() {
       if (this.currentPage == this.maxPage) return
-      this.animateGallery('forward');
+
+      let checker = false;
+      while(!checker){
+        checker = this.checkIfimagesLoaded;
+
+        checker ? this.animateGallery('forward') : null;
+        if (checker) {
+          return;
+        }
+      }
     },
     prevPage() {
       if (this.currentPage == this.minPage) return
-      this.animateGallery('backward');
+      let checker = false;
+      while(!checker){
+        checker = this.checkIfimagesLoaded;
+
+        checker ? this.animateGallery('backward') : null;
+        if (checker) {
+          return;
+        }
+      }
     },
     animateGallery(direction) {
       if (!this.animating) {
@@ -102,7 +121,15 @@ export default {
       }
     },
     imageLoaded(item) {
-      item.loaded = true; // Set the loaded flag to true when the image is loaded
+      this.loadedImages.push(item.id);
+    },
+    checkIfimagesLoaded(){
+      const listOfLists = this.paginatedItems.map(item => (item.map(image =>(image.id))));
+      const iDsOfimagesOfPage = listOfLists[0].concat(listOfLists[1]);
+      const checker = arraysHaveSameItems(this.loadedImages, iDsOfimagesOfPage );
+
+      checker ? this.loadedImages = []: null;
+      return checker
     }
   },
 

@@ -1,0 +1,4 @@
+Optimization:
+- GalleryComponent:
+    we will have a onload func on each image, that adds that image to a list of images that are loaded,
+    if all images have loaded, we will stop the loading placeholder and run the animation the changes the page of images 
