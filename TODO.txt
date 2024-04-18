@@ -1,4 +1,8 @@
 Optimization:
 - GalleryComponent:
-    we will have a onload func on each image, that adds that image to a list of images that are loaded,
-    if all images have loaded, we will stop the loading placeholder and run the animation the changes the page of images 
+    * now that we have the functions that check when images load, and that they changed, we need to monitor the change of src 
+    * We need to add all the paintings somehow
+
+- GalleryNav:
+    We need to improve the nav component of the entire gallery, its fucking ugly
+
