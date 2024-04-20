@@ -4,26 +4,25 @@
     <GalleryNav />
     <div :class="['GalleryContainer']">
       <div class="arrowContainer">
-        <img class="prev bttn" src="../../../public/images/icons/arrows/left-big.png" alt="Previous arrow" @click="prevPage" :disabled="animating"/>
+        <img :class="['prev','bttn',currentPage == minPage ? 'disabled': null]" src="../../../public/images/icons/arrows/left-big.png" alt="Previous arrow" @click="prevPage" :disabled="animating"/>
       </div>
       <div :class="['gallery',`gallery_page_${currentPage}`,'animate__animated',animating ? animation : null]">
         <template v-for="(rowItems, rowIndex) in paginatedItems" :key="rowIndex">
           <div :class="[`page_${currentPage}_row_${rowIndex + 1}`,'GalleryRow']">
             <template v-for="(item, itemIndex) in rowItems" :key="itemIndex">
               <div :class="`item_${item.id}`" class="item">
-                <img :class="['image', item.aspect]" :src="item.link_1" alt="Gallery Image" @click="openImage(item.id)" @load="imageLoaded(item)">
+                <img :id="`painting_${item.id}`" :class="['image', item.aspect, animating ? 'animating' : null]" :src="item.link_1" alt="Gallery Image" @click="openImage(item.id)" >
               </div>
             </template>
           </div>
         </template>
       </div>
       <div class="arrowContainer">
-        <img class="next bttn" src="../../../public/images/icons/arrows/right-big.png" alt="Next arrow" @click="nextPage" />
+        <img :class="['next','bttn',currentPage == maxPage ? 'disabled': null]" src="../../../public/images/icons/arrows/right-big.png" alt="Next arrow" @click="nextPage" />
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import ImageStructure from '../../../public/data/GalleryImageStructure.json';
 import { convertArrays } from '../../utils/utilFuncs.js';
@@ -44,7 +43,8 @@ export default {
       maxPage: 3,
       minPage: 1,
       showModal: false,
-      modalData: null
+      modalData: null,
+      loading: false,
     }
   },
 
@@ -71,11 +71,27 @@ export default {
       this.$router.push({ name: 'painting-detail', params: { id: paintingId } });
     },
     nextPage() {
-      if (this.currentPage == this.maxPage) return
+      if (this.currentPage == this.maxPage) return;
+
+      // Preload next page's images
+      const nextPage = this.currentPage + 1;
+      if (nextPage <= this.maxPage) {
+        this.preloadImages(nextPage);
+      }
+
+      // Animate gallery forward
       this.animateGallery('forward');
     },
     prevPage() {
-      if (this.currentPage == this.minPage) return
+      if (this.currentPage == this.minPage) return;
+
+      // Preload previous page's images
+      const prevPage = this.currentPage - 1;
+      if (prevPage >= this.minPage) {
+        this.preloadImages(prevPage);
+      }
+
+      // Animate gallery backward
       this.animateGallery('backward');
     },
     animateGallery(direction) {
@@ -101,9 +117,13 @@ export default {
         }, this.animation_duration * 2);
       }
     },
-    imageLoaded(item) {
-      item.loaded = true; // Set the loaded flag to true when the image is loaded
-    }
+    preloadImages(page) {
+      const items = this.data.filter((item) => item.page == page);
+      items.forEach((item) => {
+        const img = new Image();
+        img.src = item.link_1; 
+      });
+    },
   },
 
   components: {
@@ -194,6 +214,7 @@ export default {
 }
 .bttn{
   cursor: pointer;
+  z-index: 5;
 }
 .prev{
   margin-left:2vw;

@@ -48,6 +48,7 @@ export default {
 
 <style scoped>
 .gallery-nav {
+  z-index: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
