@@ -1,0 +1,8 @@
+Optimization:
+- GalleryComponent:
+    * now that we have the functions that check when images load, and that they changed, we need to monitor the change of src 
+    * We need to add all the paintings somehow
+
+- GalleryNav:
+    We need to improve the nav component of the entire gallery, its fucking ugly
+
