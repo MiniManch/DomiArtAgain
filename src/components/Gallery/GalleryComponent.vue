@@ -72,26 +72,18 @@ export default {
     },
     nextPage() {
       if (this.currentPage == this.maxPage) return;
-
-      // Preload next page's images
       const nextPage = this.currentPage + 1;
       if (nextPage <= this.maxPage) {
         this.preloadImages(nextPage);
       }
-
-      // Animate gallery forward
       this.animateGallery('forward');
     },
     prevPage() {
       if (this.currentPage == this.minPage) return;
-
-      // Preload previous page's images
       const prevPage = this.currentPage - 1;
       if (prevPage >= this.minPage) {
         this.preloadImages(prevPage);
       }
-
-      // Animate gallery backward
       this.animateGallery('backward');
     },
     animateGallery(direction) {

@@ -1,54 +1,89 @@
 <template>
-  <div :class="['contact-form animate_animated', animation]">
+  <div >
+    <PopUpModal v-if="showModal" :title="modalTitle" :message="modalMessage" @close="closeModal" />
+    <div :class="['contact-form']">
       <form @submit.prevent="submitForm">
-          <div class="form-group">
-              <label for="email">Email:</label>
-              <input type="email" id="email" v-model.trim="email" required>
-          </div>
-          <div class="form-group">
-              <label for="subject">Subject:</label>
-              <input type="text" id="subject" v-model.trim="subject" required>
-          </div>
-          <div class="form-group">
-              <label for="info">Message:</label>
-              <textarea id="info" v-model.trim="info" rows="5" cols="30" required></textarea>
-          </div>
-          <button type="submit">Send</button>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" v-model.trim="email" required>
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject:</label>
+          <input type="text" id="subject" v-model.trim="subject" required>
+        </div>
+        <div class="form-group">
+          <label for="info">Message:</label>
+          <textarea id="info" v-model.trim="info" rows="5" cols="30" required></textarea>
+        </div>
+        <button type="submit">Send</button>
       </form>
+    </div>
   </div>
 </template>
 
+
 <script>
 import 'animate.css';
+import emailjs from 'emailjs-com';
+
+import PopUpModal from '../General/PopUpModal.vue';
 
 export default {
-  props:['animation'],
+  props: ['animation'],
   data() {
-      return {
-          email: '',
-          subject: '',
-          info: ''
-      };
+    return {
+      email: '',
+      subject: '',
+      info: '',
+      showModal:false,
+      modalTitle:null,
+      modalMessage:null,
+    };
   },
   methods: {
-      submitForm() {
-          if (!this.email || !this.subject || !this.info) {
-              alert('Please fill in all fields.');
-              return;
-          }
-          // Code to handle form submission (e.g., send data to backend)
-          console.log('Form submitted:', {
-              email: this.email,
-              subject: this.subject,
-              info: this.info
-          });
-          // Reset form fields after submission
-          this.email = '';
-          this.subject = '';
-          this.info = '';
-          alert('Form submitted successfully!');
-      },
-  }
+    async submitForm() {
+      if (!this.email || !this.subject || !this.info ) {
+        alert('Please fill in all fields.');
+        return;
+      }
+      
+      try {
+        const response = await emailjs.send(
+          'service_lzb1hea', 
+          'template_vi75s0q', 
+          {
+            to_email: this.email,
+            subject: this.subject,
+            message: this.info,
+          },
+          'IPrktzaxEumc9aLIZ' 
+        );
+        
+        console.log('Email sent:', response);
+        this.openModal('Email sent Successfully')
+        // alert('Email sent successfully!');
+        
+        this.email = '';
+        this.subject = '';
+        this.info = '';
+        this.publicKey = '';
+      } catch (error) {
+        console.error('Error sending email:', error);
+        this.openModal('Error sending email. Please try again later.');
+      }
+    },
+    openModal(title,message){
+      this.modalTitle = title;
+      this.modalMessage = message;
+      this.showModal = true;
+    },
+    closeModal(){
+      this.modalTitle= null;
+      this.modalMessage = null;
+      this.showModal = false;
+    }
+  },
+  components:{PopUpModal}
 };
 </script>
 
@@ -56,6 +91,7 @@ export default {
 .contact-form {
   width:20vw;
   margin: 0 auto;
+  margin-left: 5vh;
 }
 
 .form-group {

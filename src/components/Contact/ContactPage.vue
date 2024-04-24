@@ -48,12 +48,14 @@
   .all {
     font-family: "Comfortaa";
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+    height:fit-content;
+    padding-bottom: 5vh;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     gap: 8vw;
-    background-color: #efeeea;
+    background-color: #EFE9E4;
     color: #5e5343;
   }
   
@@ -66,7 +68,7 @@
   }
   
   h1 {
-    font-size: 6em;
+    font-size: 5em;
     margin-bottom: 5vh;
     color: #5e5343;
   }
