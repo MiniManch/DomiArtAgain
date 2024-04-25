@@ -1,8 +1,5 @@
 <template>
   <div class="modal-overlay">
-    <div class="something">
-      heyo
-    </div>
     <div class="Modal">
       <div class="modal-header">
         <h2>{{ title }}</h2>

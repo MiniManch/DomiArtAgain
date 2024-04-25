@@ -1,6 +1,7 @@
 <template>
   <div >
     <PopUpModal v-if="showModal" :title="modalTitle" :message="modalMessage" @close="closeModal" />
+    <LoadingModal v-if="isLoading" />
     <div :class="['contact-form']">
       <form @submit.prevent="submitForm">
         <div class="form-group">
@@ -27,6 +28,7 @@ import 'animate.css';
 import emailjs from 'emailjs-com';
 
 import PopUpModal from '../General/PopUpModal.vue';
+import LoadingModal from '../General/LoadingModal.vue';
 
 export default {
   props: ['animation'],
@@ -38,15 +40,19 @@ export default {
       showModal:false,
       modalTitle:null,
       modalMessage:null,
+      isLoading: false,
     };
   },
   methods: {
+    test(){
+      this.isLoading = true;
+    },
     async submitForm() {
       if (!this.email || !this.subject || !this.info ) {
         alert('Please fill in all fields.');
         return;
       }
-      
+      this.isLoading = true;
       try {
         const response = await emailjs.send(
           'service_lzb1hea', 
@@ -60,8 +66,8 @@ export default {
         );
         
         console.log('Email sent:', response);
+        this.isLoading = false;
         this.openModal('Email sent Successfully')
-        // alert('Email sent successfully!');
         
         this.email = '';
         this.subject = '';
@@ -83,8 +89,12 @@ export default {
       this.showModal = false;
     }
   },
-  components:{PopUpModal}
-};
+  components:{
+    PopUpModal,
+    LoadingModal
+  }
+}
+
 </script>
 
 <style scoped>
