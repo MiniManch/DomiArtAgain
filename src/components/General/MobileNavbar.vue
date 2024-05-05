@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="containerOfAll">
       <!-- Hamburger icon -->
       <div class="hamburger-icon" @click="toggleNavbar" v-if="!isOpen">
         <img src="../../../public/images/icons/menu/menu.png" alt="Menu">
@@ -38,21 +38,22 @@
   
   <style scoped>
   @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400&display=swap');
-  
+  .containerOfAll{
+    position: fixed !important;
+    top:0;
+    left:2vh;
+  }
   /* Hamburger icon styles */
   .hamburger-icon {
     cursor: pointer;
     margin-top: 20px;
     position: fixed;
-    top:0;
-    left:2vh;
   }
 
   img{
     width:30px;
   }
   
-/* Navbar styles */
 nav {
   font-family: 'Comfortaa', sans-serif;
   padding-top: 20px;

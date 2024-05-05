@@ -4,47 +4,30 @@
       <img src="../../../public/images/artistic/looking2.jpg" alt="">
     </div>
 
-    <div class="right-side" >
-      <Navbar  v-if="isLandscape"/>
-      <!-- Mobile Navbar -->
-      <MobileNavbar v-else />
-
+    <div class="right-side">
+      <component :is="navbarComponent" />
+      
       <div class="content">
         <h1 class="title"> <span>Dominique</span> <br> Rokah Lopez</h1>
         <h2 class="artist">Artist</h2>
         <p class="text">I'm baby blackbird spyplane synth ascot celiac whatever. Pinterest yuccie single-origin coffee leggings iPhone blue bottle sartorial iceland cloud bread thundercats unicorn offal grailed butcher kale chips. </p>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
-import MobileNavbar from '../General/MobileNavbar.vue'
-import Navbar from '../General/HomeNavbar.vue'
-
-
 export default {
-  name: 'HelloWorld',
+  name: 'HomePage',
   props: {
-    msg: String
-  },
-  data(){
-    return{
-      isLandscape: true,
+    navbarComponent: {
+      type: Object,
+      required: true
     }
-  },
-   mounted() {
-    // Check if screen is landscape
-    this.isLandscape = window.matchMedia("(orientation: landscape)").matches;
-    // Listen for orientation change
-    window.addEventListener("orientationchange", () => {
-      this.isLandscape = window.matchMedia("(orientation: landscape)").matches;
-    });
-  },
-  components: {Navbar,MobileNavbar},
-}
+  }
+};
 </script>
+
 
 <style scoped>
 
