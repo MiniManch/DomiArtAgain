@@ -26,7 +26,6 @@
     },
     handleScroll() {
       const distanceFromTop = window.scrollY || window.pageYOffset;
-
       // Now you can use these values as thresholds
       if (this.vhToPixel(40) < distanceFromTop){
         this.displayComponent = true;

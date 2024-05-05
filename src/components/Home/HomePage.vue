@@ -4,8 +4,11 @@
       <img src="../../../public/images/artistic/looking2.jpg" alt="">
     </div>
 
-    <div class="right-side">
-      <Navbar />
+    <div class="right-side" >
+      <Navbar  v-if="isLandscape"/>
+      <!-- Mobile Navbar -->
+      <MobileNavbar v-else />
+
       <div class="content">
         <h1 class="title"> <span>Dominique</span> <br> Rokah Lopez</h1>
         <h2 class="artist">Artist</h2>
@@ -17,7 +20,7 @@
 </template>
 
 <script>
-// import Navbar from '../General/HomeNavbar.vue'
+import MobileNavbar from '../General/MobileNavbar.vue'
 import Navbar from '../General/HomeNavbar.vue'
 
 
@@ -26,7 +29,20 @@ export default {
   props: {
     msg: String
   },
-  components: {Navbar},
+  data(){
+    return{
+      isLandscape: true,
+    }
+  },
+   mounted() {
+    // Check if screen is landscape
+    this.isLandscape = window.matchMedia("(orientation: landscape)").matches;
+    // Listen for orientation change
+    window.addEventListener("orientationchange", () => {
+      this.isLandscape = window.matchMedia("(orientation: landscape)").matches;
+    });
+  },
+  components: {Navbar,MobileNavbar},
 }
 </script>
 
@@ -34,6 +50,49 @@ export default {
 
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
+@media screen and (max-width: 600px) {
+  .home-container{
+    display:flex;
+    flex-direction: column-reverse;
+    width: calc(100% - 10vh); /* Margin from both sides */
+  }
+  .left-side{
+    width:fit-content;
+    height:fit-content;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .right-side{
+    font-family: "Playfair Display", serif;
+    text-align: center;
+    color:#5E5343;
+    width:100%;
+
+    display:flex;
+    flex-direction: column;
+
+    margin-left: 8vw;
+    margin-right: 5vw;
+  }
+  .title {
+    font-size: 6vh;
+    /* margin-top: 7vh; */
+    /* margin-bottom:0;
+
+    font-weight:400;
+    width:fit-content;
+    padding-left: 0;
+    text-align: start; */
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 900px) {
+  /* CSS rules here will apply when the screen width is between 601px and 900px */
+}
+
+@media screen and (orientation: landscape) {
+  
 .home-container{
   display:flex;
   justify-content: space-between;
@@ -72,10 +131,10 @@ export default {
 }
 
 img{
-  --aspect-ratio-width: 795.4; /* Original width */
-  --aspect-ratio-height: 763.3; /* Original height */
+  --aspect-ratio-width: 795.4;
+  --aspect-ratio-height: 763.3;
 
-  width: 45vw; /* Set desired width in vw */
+  width: 45vw; 
   height: calc((var(--aspect-ratio-height) / var(--aspect-ratio-width)) * 45vw); /* Calculate height based on aspect ratio */
 }
 
@@ -100,6 +159,8 @@ img{
   font-size:2vh;
   font-family:"Comfortaa";
   text-align: start;
+}
+
 }
 
 </style>

@@ -15,19 +15,16 @@ import 'animate.css';
 export default {
 name: 'MainNavbar',
 mounted() {
-// Add event listener for scroll event when the component is mounted
     window.addEventListener('scroll', this.handleScroll);
 },
 beforeUnmount() {
-    // Remove event listener when the component is destroyed to prevent memory leaks
     window.removeEventListener('scroll', this.handleScroll);
 },
 methods: {
-  handleScroll() {
+  handleScroll() { 
     const distanceFromTop = window.scrollY || window.pageYOffset;
 
     const vhToPixel = value => (value * window.innerHeight) / 100;
-    // Now you can use these values as thresholds
     if (distanceFromTop > vhToPixel(5)) {
       this.animation = 'animate__fadeOut';
     }
