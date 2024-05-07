@@ -1,13 +1,13 @@
 <template>
-    <div class="containerOfAll">
+    <div class="containerOfAll" >
       <!-- Hamburger icon -->
-      <div class="hamburger-icon" @click="toggleNavbar" v-if="!isOpen">
+      <div class="hamburger-icon" @click="toggleNavbar" v-if="!isOpen" @scroll="Handlescroll">
         <img src="../../../public/images/icons/menu/menu.png" alt="Menu">
       </div>
   
       <!-- Navbar -->
       <nav :class="{ 'navbar-open': isOpen }">
-        <ul>
+        <ul >
           <li @click="toggleNavbar">X</li>
           <li><router-link :to="{ name: 'home' }">Home</router-link></li>
           <li><router-link :to="{ name: 'about' }">About</router-link></li>
@@ -22,7 +22,7 @@
   import 'animate.css';
   
   export default {
-    name: 'MainNavbar',
+    name: 'MobileNavbar',
     data() {
       return {
         isOpen: false
@@ -31,6 +31,9 @@
     methods: {
       toggleNavbar() {
         this.isOpen = !this.isOpen;
+      },
+      Handlescroll(){
+        console.log('scroll')
       }
     }
   }
@@ -38,16 +41,18 @@
   
   <style scoped>
   @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400&display=swap');
+
   .containerOfAll{
     position: fixed !important;
     top:0;
-    left:2vh;
+    left:1vh;
+    overflow: hidden;
+    z-index: 1000;
   }
-  /* Hamburger icon styles */
+
   .hamburger-icon {
     cursor: pointer;
     margin-top: 20px;
-    position: fixed;
   }
 
   img{
@@ -58,14 +63,11 @@ nav {
   font-family: 'Comfortaa', sans-serif;
   padding-top: 20px;
   width: fit-content;
-  position: fixed;
   animation-duration: 0.5s;
   padding-top: 0;
-  top: 0;
-  left: 0; /* Adjust this value to control the distance from the left edge */
+  overflow-y: hidden;
 }
 
-/* Updated styles for vertical navbar */
 ul {
   list-style-type: none;
   padding: 0;

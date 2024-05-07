@@ -1,6 +1,5 @@
 <template>
   <div class="everything">
-    <MainNavbar />
     <GalleryNav />
     <div :class="['GalleryContainer']">
       <div class="arrowContainer">
@@ -30,8 +29,6 @@ import { convertArrays } from '../../utils/utilFuncs.js';
 import 'animate.css';
 
 import GalleryNav from './GalleryNav.vue';
-import MainNavbar from '../General/MainNavbar.vue';
-
 export default {
   data() {
     return {
@@ -120,7 +117,6 @@ export default {
 
   components: {
     GalleryNav,
-    MainNavbar
   }
 };
 </script>

@@ -5,10 +5,9 @@
     </div>
 
     <div class="right-side">
-      <component :is="navbarComponent" />
       
       <div class="content">
-        <h1 class="title"> <span>Dominique</span> <br> Rokah Lopez</h1>
+        <h1 class="title"> <span>Dominique</span> <br> Lopez Rokah</h1>
         <h2 class="artist">Artist</h2>
         <p class="text">I'm baby blackbird spyplane synth ascot celiac whatever. Pinterest yuccie single-origin coffee leggings iPhone blue bottle sartorial iceland cloud bread thundercats unicorn offal grailed butcher kale chips. </p>
       </div>
@@ -19,12 +18,6 @@
 <script>
 export default {
   name: 'HomePage',
-  props: {
-    navbarComponent: {
-      type: Object,
-      required: true
-    }
-  }
 };
 </script>
 
@@ -35,6 +28,7 @@ export default {
 
 @media screen and (max-width: 600px) {
   .home-container{
+    position: relative;
     display:flex;
     flex-direction: column-reverse;
     width: calc(100% - 10vh); /* Margin from both sides */

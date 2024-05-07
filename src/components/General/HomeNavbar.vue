@@ -22,6 +22,7 @@ beforeUnmount() {
 },
 methods: {
   handleScroll() { 
+    console.log('heyo')
     const distanceFromTop = window.scrollY || window.pageYOffset;
 
     const vhToPixel = value => (value * window.innerHeight) / 100;
