@@ -74,7 +74,6 @@ export default {
   display:flex;
   justify-content: space-between;
   width: calc(100% - 10vh); /* Margin from both sides */
-  height:100vh;
 }
 .left-side{
   width:fit-content;
