@@ -6,7 +6,6 @@
             <img :src="this.itemData.link_1" alt="" :class="[this.itemData.aspect]">
         </div>
         <div class="info">
-            <NavBar />
             <h1 class="title">{{ this.itemData.title }}</h1>
             <h3 class="year">{{ this.itemData.year }}</h3>
             <h2 class="text">{{ this.itemData.text }}</h2>
@@ -18,13 +17,11 @@
 </template>
 <script>
 import 'animate.css';
-import NavBar from '../General/GalleryItemNavbar.vue';
 import GalleryItemModal from './GalleryItemModal.vue';
 
 export default {
   name: 'GalleryItem',
   components:{
-    NavBar,
     GalleryItemModal
   },
   data() {

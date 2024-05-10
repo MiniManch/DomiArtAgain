@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar />
     <HomePage />
     <Gallery :data="data"/>
     <Contact />
@@ -11,7 +10,6 @@
 import Gallery from "../Gallery/GalleryComponent.vue";
 import HomePage from "./HomePage.vue";
 import Contact from "../Contact/ContactPage.vue"
-import Navbar from "../General/FinalNavbar.vue"
 
 import data from "../../../public/data/GalleryImages.json";
   
@@ -22,24 +20,29 @@ export default {
       data: data,
     }
   },
+  
   components: {
     Gallery,
     HomePage,
     Contact,
-    Navbar
   },
-  
 };
 </script>
 
 <style>
+@media screen and (max-width: 600px) {
+  html, body {
+    overflow-x:hidden;
+  
+  }
+}
+
 body{
   margin:0;
   padding:0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height:100vh;
-  overflow-x: hidden;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

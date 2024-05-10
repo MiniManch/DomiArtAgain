@@ -31,10 +31,11 @@ export default {
     position: relative;
     display:flex;
     flex-direction: column-reverse;
-    width: calc(100% - 10vh); /* Margin from both sides */
+    width:100%;
+    padding-bottom: 5vh;
   }
   .left-side{
-    width:fit-content;
+    width:100%;
     height:fit-content;
     display:flex;
     justify-content: center;
@@ -48,24 +49,26 @@ export default {
 
     display:flex;
     flex-direction: column;
-
-    margin-left: 8vw;
-    margin-right: 5vw;
+  }
+  .content{
+    display:flex;
+    flex-direction:column;
+    align-items: center;
   }
   .title {
     font-size: 6vh;
-    /* margin-top: 7vh; */
-    /* margin-bottom:0;
-
-    font-weight:400;
-    width:fit-content;
-    padding-left: 0;
-    text-align: start; */
+  }
+  img{
+    height:40vh;
+  }
+  .text{
+    width:80%;
   }
 }
 
 @media screen and (min-width: 601px) and (max-width: 900px) {
-  /* CSS rules here will apply when the screen width is between 601px and 900px */
+
+  
 }
 
 @media screen and (orientation: landscape) {

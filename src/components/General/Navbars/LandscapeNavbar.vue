@@ -1,9 +1,6 @@
 <template>
     <nav :class="navStyle">
-      <div class="hamburger-icon" @click="toggleNavbar" v-if="!isOpen && !isLandscape">
-        <img src="../../../public/images/icons/menu/menu.png" alt="Menu">
-      </div>
-      <ul :style="{ 'background-color': `rgba(94, 83, 67, ${navOpacity})` }">
+      <ul :style="{ 'background-color': `rgba(94, 83, 67, ${navOpacity})` }" v-if="navStyle === 'landscape' || (isOpen && !isLandscape)  ">
         <li><router-link :to="{ name: 'home' }" :style="{ color: linkColor }">Home</router-link></li>
         <li><router-link :to="{ name: 'about' }" :style="{ color: linkColor }">About</router-link></li>
         <li><router-link :to="{ name: 'gallery' }" :style="{ color: linkColor }">Gallery</router-link></li>
@@ -11,7 +8,7 @@
       </ul>
     </nav>
   </template>
-  <!-- if navstyle is smallscreen, then hamburger placement, plus clicking it, plus menu opening from the side with animation.  -->
+  
   <script>
   import 'animate.css';
   
@@ -35,6 +32,7 @@
     mounted() {
       // Add event to window for scrolling
       window.addEventListener('scroll', this.handleScroll);
+      console.log(window.scrollY)
   
       // Check if screen is landscape
       this.isLandscape = window.matchMedia("(orientation: landscape)").matches;
@@ -54,16 +52,8 @@
       handleScroll() {
         const distanceFromTop = window.scrollY || window.pageYOffset;
         this.navOpacity = distanceFromTop / this.vhToPixel(15);
-        if (this.vhToPixel(7) < distanceFromTop) {
-          // this.navStyle = 'smallScreen'
-        }
-        if (this.vhToPixel(7) > distanceFromTop) {
-          this.navStyle = 'landscape'
-        }
+        console.log(this.navOpacity);
       },
-      openMobileNavbar(){
-        this.isOpen = !this.isOpen;
-      }
     },
   }
   </script>
@@ -73,23 +63,18 @@
   nav {
     font-family: 'Comfortaa', sans-serif;
     width: fit-content;
-  }
-  .landscape {
     position: fixed;
     right: 15%;
     z-index: 5;
   }
-  .landscape > ul {
+ 
+  ul {
     list-style-type: none;
     display: flex;
     justify-content: space-around;
     width:30vw;
   }
-  .smallScreen >
-  ul {
-    padding: 0;
-    margin: 0;
-  }
+
   li {
     display: inline-block;
     padding-top: 10px;
@@ -114,11 +99,6 @@
     width: 100%;
     left: 50%;
   }
-  .hamburger-icon {
-    width: 50px;
-  }
-  .hamburger-icon > img {
-    width: 100%;
-  }
+
   </style>
   
