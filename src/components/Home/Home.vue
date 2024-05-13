@@ -1,13 +1,15 @@
 <template>
   <div>
     <HomePage />
-    <Gallery :data="data"/>
+    <LandscapeGallery :data="data" v-if="isLandscape"/>
+    <MobileGallery v-else/>
     <Contact />
   </div>
 </template>
   
 <script>
-import Gallery from "../Gallery/GalleryComponent.vue";
+import LandscapeGallery from "../Gallery/LandscapeGalleryComponent.vue";
+import MobileGallery from "../Gallery/MobileGallery.vue";
 import HomePage from "./HomePage.vue";
 import Contact from "../Contact/ContactPage.vue"
 
@@ -18,13 +20,30 @@ export default {
   data(){
     return{
       data: data,
+      isMobile: false,
+      isLandscape: false
     }
   },
   
   components: {
-    Gallery,
+    LandscapeGallery,
+    MobileGallery,
     HomePage,
     Contact,
+  },
+  mounted() {
+    // Detect screen size and orientation
+    this.detectScreen();
+    // Add event listener to detect orientation change
+    window.addEventListener('orientationchange', this.detectScreen);
+  },
+  methods: {
+    detectScreen() {
+      // Check if the viewport width is less than a certain threshold to determine mobile
+      this.isMobile = window.innerWidth < 768; 
+      // Check if the aspect ratio indicates landscape orientation
+      this.isLandscape = window.innerWidth > window.innerHeight;
+    }
   },
 };
 </script>

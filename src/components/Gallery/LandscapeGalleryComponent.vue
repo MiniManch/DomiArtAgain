@@ -1,6 +1,5 @@
 <template>
   <div class="everything">
-    <GalleryNav />
     <div :class="['GalleryContainer']">
       <div class="arrowContainer">
         <img :class="['prev','bttn',currentPage == minPage ? 'disabled': null]" src="../../../public/images/icons/arrows/left-big.png" alt="Previous arrow" @click="prevPage" :disabled="animating"/>
@@ -29,7 +28,6 @@ import { convertArrays } from '../../utils/utilFuncs.js';
 
 import 'animate.css';
 
-import GalleryNav from './GalleryNav.vue';
 export default {
   data() {
     return {
@@ -115,10 +113,6 @@ export default {
       });
     },
   },
-
-  components: {
-    GalleryNav,
-  }
 };
 </script>
 
@@ -227,6 +221,7 @@ export default {
 }
 .everything{
   background-color: #EFE9E4;
+  padding-top: 5vh;
 }
 
 .imageTitleTemplate{
