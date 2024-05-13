@@ -11,6 +11,7 @@
             <template v-for="(item, itemIndex) in rowItems" :key="itemIndex">
               <div :class="`item_${item.id}`" class="item">
                 <img :id="`painting_${item.id}`" :class="['image', item.aspect, animating ? 'animating' : null]" :src="item.link_1" alt="Gallery Image" @click="openImage(item.id)" >
+                <div class="imageTitleTemplate">{{ item.title }}</div>
               </div>
             </template>
           </div>
@@ -226,5 +227,26 @@ export default {
 }
 .everything{
   background-color: #EFE9E4;
+}
+
+.imageTitleTemplate{
+  background-color: rgba(94, 83, 67, 0.7);
+  height:4vh;
+  width:80%;
+  position: relative;
+  bottom:5vh;
+  left:10%;
+  
+  color:#EFE9E4;
+  font-family: 'Comfortaa', sans-serif;
+  line-height: 4vh; 
+  text-align: center; 
+
+  transition: opacity 0.5s ease;
+  opacity: 0;
+}
+
+.item:hover .imageTitleTemplate {
+  opacity: 1;
 }
 </style>
