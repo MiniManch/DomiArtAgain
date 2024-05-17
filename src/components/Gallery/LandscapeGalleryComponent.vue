@@ -1,27 +1,37 @@
 <template>
   <div class="everything">
     <div :class="['GalleryContainer']">
+
+      <!-- Previous arrow -->
       <div class="arrowContainer">
         <img :class="['prev','bttn',currentPage == minPage ? 'disabled': null]" src="../../../public/images/icons/arrows/left-big.png" alt="Previous arrow" @click="prevPage" :disabled="animating"/>
       </div>
+
+      <!-- Gallery -->
       <div :class="['gallery',`gallery_page_${currentPage}`,'animate__animated',animating ? animation : null]">
         <template v-for="(rowItems, rowIndex) in paginatedItems" :key="rowIndex">
           <div :class="[`page_${currentPage}_row_${rowIndex + 1}`,'GalleryRow']">
             <template v-for="(item, itemIndex) in rowItems" :key="itemIndex">
               <div :class="`item_${item.id}`" class="item">
+                <!-- Image -->
                 <img :id="`painting_${item.id}`" :class="['image', item.aspect, animating ? 'animating' : null]" :src="item.link_1" alt="Gallery Image" @click="openImage(item.id)" >
-                <div class="imageTitleTemplate">{{ item.title }}</div>
+                <!-- Image title template -->
+                <div class="imageTitleTemplate" :style="{ bottom: item.aspect === 'horizontal' ? '8vh' : '6vh' }">{{ item.title }}</div>
               </div>
             </template>
           </div>
         </template>
       </div>
+
+        <!-- Next arrow -->
       <div class="arrowContainer">
         <img :class="['next','bttn',currentPage == maxPage ? 'disabled': null]" src="../../../public/images/icons/arrows/right-big.png" alt="Next arrow" @click="nextPage" />
       </div>
+      
     </div>
   </div>
 </template>
+
 <script>
 import ImageStructure from '../../../public/data/GalleryImageStructure.json';
 import { convertArrays } from '../../utils/utilFuncs.js';
@@ -222,6 +232,7 @@ export default {
 .everything{
   background-color: #EFE9E4;
   padding-top: 5vh;
+  padding-bottom: 10vh;
 }
 
 .imageTitleTemplate{
@@ -229,7 +240,6 @@ export default {
   height:4vh;
   width:80%;
   position: relative;
-  bottom:5vh;
   left:10%;
   
   color:#EFE9E4;

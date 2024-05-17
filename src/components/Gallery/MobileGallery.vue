@@ -1,5 +1,14 @@
 <template>
     <div class='everything' v-if=" paginatedItems">
+        <h1>Gallery</h1>
+        <nav class="pagniationItem" >
+            <ul class="pagination pagination-sm mb-0 pb-5" >
+                <li class="page-item" v-for="(item, index) in paginatedItems" :key="index" >
+                    <span :class="['page-link',(index+1) === activePage ? 'activePage' : null]" @click="changeActivePage(index+1)">{{index + 1}}</span>
+                </li>
+            </ul>
+        </nav>
+
         <div class="galleryContainer">
             <div class="row row-cols-1 row-cols-md-3 g-4 w-100">
                 <div class="col mb-5 " v-for="(item, index) in paginatedItems[this.activePage -1]" :key="index">
@@ -54,6 +63,7 @@ export default {
                 this.activePage = pageNum;
                 this.isLoading = true;
                 setTimeout(() =>{this.isLoading = false;},1200)
+                window.scrollTo({ top: 0 });
             }
         },
         openImage(paintingId) {
@@ -68,12 +78,17 @@ export default {
 
 <style scoped>
     .everything{
-        
         background-color: #EFE9E4;
         display: flex;
         flex-direction: column;
         align-items: stretch;
         width:100%;
+    }
+    h1{
+        color:#5E5343;
+        font-family: "Playfair Display", serif;
+        font-size: 6vh;
+        margin-bottom: 5vh;
     }
     .image{
         max-height:350px;
@@ -90,7 +105,7 @@ export default {
     }
     .page-link{
         font-family: 'Comfortaa', sans-serif;
-        font-size:1.2em;
+        font-size:0.8em;
         background-color: #5E5343;
         border: 1px solid #5E5343;
         color:#EFE9E4
@@ -99,8 +114,6 @@ export default {
         background-color: #EFE9E4;
         border: 1px solid #EFE9E4;
         color:#5E5343;
-
-
     }
 
     .row,.col{
