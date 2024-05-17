@@ -75,30 +75,34 @@ export default {
 
   overflow-y: hidden;
   overflow-x: hidden;
-
 }
 
 .image{
-  width:60%;
+  width:100%;
   height:100%;
+
+  display:inline-block;
 }
 
 .square{
-    width:80%;
-    height:80%;
-}
-
-.vertical{
+    width:100%;
     height:100%;
 }
 
+.vertical{
+  height:60vh;
+  margin-top: 5vh;
+}
+
+.image.vertical{
+  height:fit-content;
+}
 .horizontal{
   width:100%;
-
 }
 
 .info{
-  height:100%;
+  height:40%;
 
   font-family: "Playfair Display", serif;
   color:#5E5343;
@@ -111,7 +115,7 @@ export default {
 
 .text{
   font-weight: 200;
-  font-size: 1.2em;
+  font-size: 0.8em;
 }
 
 .image > img{
