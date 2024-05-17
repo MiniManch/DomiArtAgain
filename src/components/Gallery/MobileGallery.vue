@@ -1,9 +1,9 @@
 <template>
     <div class='everything' v-if=" paginatedItems">
-        <div v-for="(item, index) in paginatedItems[this.activePage -1]" :key="index">
+        <div class="galleryContainer">
             <div class="row row-cols-1 row-cols-md-3 g-4 w-100">
-                <div class="col mb-5 ">
-                    <img :src="item.link_1" class="card-img-top image" alt="...">
+                <div class="col mb-5 " v-for="(item, index) in paginatedItems[this.activePage -1]" :key="index">
+                    <img :src="item.link_1" class="card-img-top image" alt="..." @click="openImage(item.id)" >
                     <h5 class="image-title">{{item.title}}</h5>
                 </div>
             </div>
@@ -41,7 +41,6 @@ export default {
         this.data = imageData;
         this.paginateData(5);
         this.maxPages = this.paginatedItems.length;
-        console.log(this.paginatedItems[5])
     },
     methods: {
         paginateData(pageSize) {
@@ -54,9 +53,12 @@ export default {
             if(this.activePage != pageNum){
                 this.activePage = pageNum;
                 this.isLoading = true;
-                setTimeout(() =>{this.isLoading = false;},1000)
+                setTimeout(() =>{this.isLoading = false;},1200)
             }
-        }
+        },
+        openImage(paintingId) {
+            this.$router.push({ name: 'painting-detail', params: { id: paintingId } });
+        },
     },
     components:{
         LoadingModal
@@ -99,5 +101,14 @@ export default {
         color:#5E5343;
 
 
+    }
+
+    .row,.col{
+        padding: 0;
+    }
+
+    .galleryContainer{
+        display: flex;
+        justify-content: center;
     }
 </style>

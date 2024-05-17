@@ -1,7 +1,6 @@
 <template>
-    <GalleryItemModal v-if="this.displayModal" @close="openOtherImage" :data="this.itemData"/>
+    <GalleryItemModal v-if="this.displayModal" @close="openOtherImage" :data="this.itemData" :isMobileSrc="true"/>
     <div v-if="this.itemData" class="total-wrapper">
-
         <div :class="['image',this.itemData.aspect]">
             <img :src="this.itemData.link_1" alt="" :class="[this.itemData.aspect]">
         </div>
@@ -11,7 +10,6 @@
             <h2 class="text">{{ this.itemData.text }}</h2>
 
             <img :src="this.itemData.link_2" alt="" class="other_image" @click="openOtherImage()" >
-
         </div>
     </div>
 </template>
@@ -69,10 +67,15 @@ export default {
   margin-left:10vw;
 
   display:flex;
-  flex-direction:row;
+  flex-direction:column;
   justify-content: center;
+  align-items: center;
 
   gap: 2vw;
+
+  overflow-y: hidden;
+  overflow-x: hidden;
+
 }
 
 .image{
@@ -84,16 +87,17 @@ export default {
     width:80%;
     height:80%;
 }
+
 .vertical{
     height:100%;
 }
+
 .horizontal{
-  width:80%;
+  width:100%;
 
 }
 
 .info{
-  width:40%;
   height:100%;
 
   font-family: "Playfair Display", serif;

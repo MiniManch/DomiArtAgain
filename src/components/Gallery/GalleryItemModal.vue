@@ -5,7 +5,7 @@
             <div v-if="showMagnifier" class="magnifier" :style="{ backgroundImage: 'url(' + data.link_2 + ')', backgroundPosition: magnifierPosition }"></div>
         </div>
         <div class="close" @click="closeModal">
-            <img src="../../../public/images/icons/close/150.png" alt="cancel"/>
+            <img :src="closeBtnSrc" alt="cancel"/>
         </div>
     </div>
 </template>
@@ -17,13 +17,18 @@ export default {
     name: 'GalleryItemModal',
     props: {
         func: Function,
-        data: Object
+        data: Object,
+        isMobileSrc: Boolean,
     },
     data() {
         return {
             showMagnifier: false,
-            magnifierPosition: '0% 0%'
+            magnifierPosition: '0% 0%',
+            closeBtnSrc: null,
         };
+    },
+    mounted() {
+        this.closeBtnSrc = this.isMobileSrc ? '/images/icons/close/50.png' : '/images/icons/close/100.png';
     },
     methods:{
         closeModal(){
@@ -61,7 +66,7 @@ export default {
 
 <style scoped>
 .overlay {
-    z-index: 1;
+    z-index: 5;
     position: absolute;
     width: 100vw;
     height: 100vh;
