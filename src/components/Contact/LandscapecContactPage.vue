@@ -1,5 +1,5 @@
 <template>
-    <div class="all">
+    <div class="all" id="Contact">
       <div class="info">
         <h1>Contact Us</h1>
         <div class="contact-ways">
@@ -68,15 +68,15 @@
   }
   
   h1 {
-    font-size: 5em;
+    font-size: 8vh;
     margin-bottom: 5vh;
     color: #5e5343;
+    font-family: "Playfair Display", serif;
   }
   
   .icon {
     width: 80px;
     height: 80px;
-    margin-left: 1vw;
   }
   
   .contact-ways {

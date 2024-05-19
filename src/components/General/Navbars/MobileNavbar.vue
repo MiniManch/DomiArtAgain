@@ -7,8 +7,8 @@
       <li @click="toggleNavbar('close')" class="closeButton">X</li>
       <li><router-link :to="{ name: 'home' }">Home</router-link></li>
       <li><router-link :to="{ name: 'about' }">About</router-link></li>
-      <li><router-link :to="{ name: 'gallery' }">Gallery</router-link></li>
-      <li><router-link :to="{ name: 'contact' }">Contact</router-link></li>
+      <li><a href="#Gallery">Gallery</a></li>
+      <li><a href="#Contact">Contact</a></li>
     </ul>
   </nav>
 </template>

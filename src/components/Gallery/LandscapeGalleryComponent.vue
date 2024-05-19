@@ -1,5 +1,5 @@
 <template>
-  <div class="everything">
+  <div class="everything" id="Gallery">
     <h1>Gallery</h1>
     <div :class="['GalleryContainer']">
 

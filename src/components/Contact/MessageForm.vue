@@ -162,4 +162,11 @@ input[type="email"]:focus {
   outline: none;
   border-width: 3px;
 }
+
+@media only screen and (max-width: 600px) and (orientation: portrait) {
+  .contact-form {
+    width:50vw;
+    margin: 0 auto;
+  }
+}
 </style>

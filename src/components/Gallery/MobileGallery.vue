@@ -1,5 +1,5 @@
 <template>
-    <div class='everything' v-if="paginatedItems">
+    <div class='everything' v-if="paginatedItems" id="Gallery"> 
         <h1 ref="galleryTitle">Gallery</h1>
         <nav class="pagniationItem">
             <ul class="pagination pagination-sm mb-0 pb-5">
