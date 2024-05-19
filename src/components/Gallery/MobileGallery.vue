@@ -87,6 +87,7 @@ export default {
         flex-direction: column;
         align-items: stretch;
         width: 100%;
+        user-select: none;
     }
     h1 {
         color: #5E5343;

@@ -1,9 +1,14 @@
 <template>
   <div>
     <HomePage />
+
+    <!-- Gallery -->
     <LandscapeGallery :data="data" v-if="isLandscape"/>
     <MobileGallery v-else/>
-    <Contact />
+
+    <!-- Contact -->
+    <LandscapeContactPage v-if="isLandscape"/>
+    <MobileGalleryContactPage v-else />
   </div>
 </template>
   
@@ -11,7 +16,8 @@
 import LandscapeGallery from "../Gallery/LandscapeGalleryComponent.vue";
 import MobileGallery from "../Gallery/MobileGallery.vue";
 import HomePage from "./HomePage.vue";
-import Contact from "../Contact/ContactPage.vue"
+import LandscapeContactPage from "../Contact/LandscapecContactPage.vue";
+import MobileGalleryContactPage from "../Contact/MobileContactPage.vue";
 
 import data from "../../../public/data/GalleryImages.json";
   
@@ -29,7 +35,8 @@ export default {
     LandscapeGallery,
     MobileGallery,
     HomePage,
-    Contact,
+    LandscapeContactPage,
+    MobileGalleryContactPage
   },
   mounted() {
     // Detect screen size and orientation
