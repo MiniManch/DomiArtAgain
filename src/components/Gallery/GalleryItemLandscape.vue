@@ -1,5 +1,6 @@
 <template>
     <GalleryItemModal v-if="this.displayModal" @close="openOtherImage" :data="this.itemData" :isMobileSrc="false"/>
+    <LoadingModal v-if="isLoading" />
     <div v-if="this.itemData" class="total-wrapper">
 
         <div :class="['image',this.itemData.aspect]">
@@ -18,22 +19,29 @@
 <script>
 import 'animate.css';
 import GalleryItemModal from './GalleryItemModal.vue';
+import LoadingModal from '../General/LoadingModal.vue';
 
 export default {
   name: 'GalleryItem',
   components:{
-    GalleryItemModal
+    GalleryItemModal,
+    LoadingModal,
   },
   data() {
     return {
       itemId: null,
       itemData: null,
       displayModal:false,
+      isLoading: false,
     }
   },
   mounted() {
     this.itemId = this.$router.currentRoute._rawValue.params.id;
     this.getItemData('/data/GalleryImages.json', this.itemId); 
+    this.isLoading = true;
+    setTimeout(()=>{
+      this.isLoading = false;
+    },1200)
   },
   methods: {
     getItemData(url, id) {

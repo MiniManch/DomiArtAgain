@@ -1,5 +1,6 @@
 <template>
   <div class="everything">
+    <h1>Gallery</h1>
     <div :class="['GalleryContainer']">
 
       <!-- Previous arrow -->
@@ -127,6 +128,13 @@ export default {
 </script>
 
 <style scoped>
+
+h1{
+  color:#5E5343;
+  font-family: "Playfair Display", serif;
+  font-size: 8vh;
+  margin-bottom: 5vh;
+}
 
 .GalleryContainer {
   display: flex;
