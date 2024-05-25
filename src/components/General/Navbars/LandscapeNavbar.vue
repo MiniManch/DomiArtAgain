@@ -3,8 +3,8 @@
       <ul :style="{ 'background-color': `rgba(94, 83, 67, ${navOpacity})` }" v-if="navStyle === 'landscape' || (isOpen && !isLandscape)  ">
         <li><router-link :to="{ name: 'home' }" :style="{ color: linkColor }">Home</router-link></li>
         <li><router-link :to="{ name: 'about' }" :style="{ color: linkColor }">About</router-link></li>
-        <li><router-link :to="{ name: 'gallery' }" :style="{ color: linkColor }">Gallery</router-link></li>
-        <li><router-link :to="{ name: 'contact' }" :style="{ color: linkColor }">Contact</router-link></li>
+        <li><a href="#Gallery" :style="{ color: linkColor }">Gallery</a></li>
+        <li><a href="#Contact" :style="{ color: linkColor }">Contact</a></li>
       </ul>
     </nav>
   </template>
@@ -86,6 +86,7 @@
   a {
     text-decoration: none;
     transition: color 0.3s ease;
+    color: #5E5343;
   }
   a::after {
     content: '';
@@ -94,11 +95,11 @@
     height: 2px;
     background: #5E5343;
     transition: width .4s;
+
   }
   a:hover::after {
     width: 100%;
     left: 50%;
   }
-
   </style>
   

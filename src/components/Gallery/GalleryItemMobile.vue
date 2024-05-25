@@ -86,7 +86,7 @@ export default {
 
 .square{
     width:100%;
-    height:100%;
+    height:80%;
 }
 
 .vertical{
@@ -99,6 +99,7 @@ export default {
 }
 .horizontal{
   width:100%;
+  height:fit-content;
 }
 
 .info{

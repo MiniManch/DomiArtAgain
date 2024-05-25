@@ -76,6 +76,7 @@ ul {
 
 li {
   list-style: none;
+  font-size: 1.5em;
   display: flex;
   justify-content: flex-start;
 }
