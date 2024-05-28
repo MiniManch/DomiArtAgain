@@ -28,7 +28,7 @@ export default {
         };
     },
     mounted() {
-        this.closeBtnSrc = this.isMobileSrc ? '/images/icons/close/50.png' : '/images/icons/close/100.png';
+        this.closeBtnSrc = this.isMobileSrc ? '/images/icons/close/50-dark.png' : '/images/icons/close/100.png';
     },
     methods:{
         closeModal(){
@@ -107,5 +107,18 @@ export default {
     transform: translate(-50%, -50%);
     transition: all 0s ease-in-out;
 }
+
+@media only screen and (max-width: 600px) and (orientation: portrait) {
+    .image{
+        height:80%;
+    }
+    .close > img{
+        width:50px;
+    }
+    .close{
+        top:12vh;
+    }
+}
+
 
 </style>
