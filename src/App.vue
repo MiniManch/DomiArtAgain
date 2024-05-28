@@ -2,11 +2,13 @@
   <LandscapeNavbar v-if="isLandscape" />
   <MobileNavbar v-else />
   <router-view></router-view>
+  <LandscapeFooter  />
 </template>
 
 <script>
 import LandscapeNavbar from "./components/General/Navbars/LandscapeNavbar.vue"
 import MobileNavbar from "./components/General/Navbars/MobileNavbar.vue";
+import LandscapeFooter from "./components/Footer/LandscapeFooter.vue";
 
 export default {
   name: 'App',
@@ -32,7 +34,8 @@ export default {
   },
   components:{
     LandscapeNavbar,
-    MobileNavbar
+    MobileNavbar,
+    LandscapeFooter
   }
   
 }

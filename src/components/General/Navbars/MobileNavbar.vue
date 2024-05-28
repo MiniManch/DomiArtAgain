@@ -5,7 +5,7 @@
     </div>
     <ul :class="[isOpen ? 'navbar-open' : null, animating ? animation : null, 'animate__animated' ]" v-if="isOpen || animating" class="animated-navbar">
       <li @click="toggleNavbar('close')" class="closeButton">X</li>
-      <li><router-link :to="{ name: 'home' }">Home</router-link></li>
+      <li @click="determineHomeUrl"><a :href="homeLink" :style="{ color: linkColor }">Home</a></li>
       <li><router-link :to="{ name: 'about' }">About</router-link></li>
       <li><a href="#Gallery">Gallery</a></li>
       <li><a href="#Contact">Contact</a></li>
@@ -24,6 +24,7 @@ export default {
       animating: false,
       animation: null,
       hamburgerAnimation: null,
+      homeLink:'/home'
     }
   },
   methods: {
@@ -47,6 +48,12 @@ export default {
         this.hamburgerAnimation = 'animate__fadeIn';
       }
     },
+    determineHomeUrl(){
+      let urlStringLast4Chars = window.location.href.substring(window.location.href.length-4);
+      let urlStringLastChar = window.location.href.charAt(window.location.href.length -1);
+      let checker = urlStringLast4Chars === 'home' || urlStringLastChar === '/';
+      checker ? this.homeLink = '#home' : this.homeLink = '/home';
+    }
   }
 }
 </script>

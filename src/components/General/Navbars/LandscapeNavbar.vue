@@ -1,7 +1,7 @@
 <template>
     <nav :class="navStyle">
       <ul :style="{ 'background-color': `rgba(94, 83, 67, ${navOpacity})` }" v-if="navStyle === 'landscape' || (isOpen && !isLandscape)  ">
-        <li><router-link :to="{ name: 'home' }" :style="{ color: linkColor }">Home</router-link></li>
+        <li @click="determineHomeUrl"><a :href="homeLink" :style="{ color: linkColor }">Home</a></li>
         <li><router-link :to="{ name: 'about' }" :style="{ color: linkColor }">About</router-link></li>
         <li><a href="#Gallery" :style="{ color: linkColor }">Gallery</a></li>
         <li><a href="#Contact" :style="{ color: linkColor }">Contact</a></li>
@@ -19,7 +19,8 @@
         navStyle: null,
         navOpacity: 0,
         isOpen: null,
-        isLandscape: null
+        isLandscape: null,
+        homeLink:'/home'
       }
     },
     computed: {
@@ -32,7 +33,6 @@
     mounted() {
       // Add event to window for scrolling
       window.addEventListener('scroll', this.handleScroll);
-      console.log(window.scrollY)
   
       // Check if screen is landscape
       this.isLandscape = window.matchMedia("(orientation: landscape)").matches;
@@ -44,6 +44,8 @@
       window.addEventListener("orientationchange", () => {
         this.isLandscape = window.matchMedia("(orientation: landscape)").matches;
       });
+
+      this.homeLink = '/';
     },
     methods: {
       vhToPixel(value) {
@@ -52,8 +54,13 @@
       handleScroll() {
         const distanceFromTop = window.scrollY || window.pageYOffset;
         this.navOpacity = distanceFromTop / this.vhToPixel(15);
-        console.log(this.navOpacity);
       },
+      determineHomeUrl(){
+        let urlStringLast4Chars = window.location.href.substring(window.location.href.length-4);
+        let urlStringLastChar = window.location.href.charAt(window.location.href.length -1);
+        let checker = urlStringLast4Chars === 'home' || urlStringLastChar === '/';
+        checker ? this.homeLink = '#home' : this.homeLink = '/home';
+      }
     },
   }
   </script>

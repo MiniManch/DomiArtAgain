@@ -61,11 +61,10 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 .total-wrapper{
-  width:80vw;
+  width:90vw;
   height:100vh;
 
-  margin-left:10vw;
-
+  margin: 0 auto;
   display:flex;
   flex-direction:column;
   justify-content: center;

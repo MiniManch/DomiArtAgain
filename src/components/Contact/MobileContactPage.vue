@@ -91,6 +91,15 @@
   .contact > h3 {
     margin-left: 2vw;
   }
+
+  .contact.message{
+    flex-direction: column;
+    align-items: center;
+
+  }
+  .contact.message > img{
+    align-self: flex-start;
+  }
   
   .message > h3 {
     text-decoration: underline;
@@ -109,7 +118,8 @@
     position: relative;
     display:flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+
   }
   .messageContent>h3{
     margin-bottom: 3vh;

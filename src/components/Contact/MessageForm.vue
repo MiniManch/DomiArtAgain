@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div class="everything">
     <PopUpModal v-if="showModal" :title="modalTitle" :message="modalMessage" @close="closeModal" />
     <LoadingModal v-if="isLoading" />
     <div :class="['contact-form']">
@@ -133,8 +133,9 @@ textarea {
 button {
   padding: 10px 20px;
   font-size: 16px;
+  font-weight: bold;
   background-color: #5E5343;
-  color: #fff;
+  color: #EFE9E4;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -165,8 +166,12 @@ input[type="email"]:focus {
 
 @media only screen and (max-width: 600px) and (orientation: portrait) {
   .contact-form {
-    width:50vw;
-    margin: 0 auto;
+    width:60vw;
+    margin-left: 0;
   }
+  button {
+  background-color:  #EFE9E4;
+  color: #5E5343;
+}
 }
 </style>
