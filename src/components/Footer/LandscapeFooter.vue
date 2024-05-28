@@ -2,10 +2,10 @@
     <div class='everything'>
         <div class="content">
             <div class='socials'>
-                <a href='https://icons8.com/'>
+                <a href='https://www.facebook.com/profile.php?id=100063518798255' target='_blank' >
                    <img src='/images/icons/social/facebook.png' />
                  </a>
-                 <a href='https://icons8.com/'>
+                 <a href='https://www.instagram.com/domiabstractart/' target="_blank">
                      <img src ='/images/icons/social/instagram.png' />
                  </a>
             </div>
