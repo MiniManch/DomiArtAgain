@@ -1,10 +1,10 @@
 <template>
   <nav :class="navStyle">
-    <ul :style="{ 'background-color': `rgba(94, 83, 67, ${navOpacity})` }" v-if="navStyle === 'landscape' || (isOpen && !isLandscape)">
-      <li @click="determineHomeUrl"><a :href="homeLink" :style="{ color: linkColor }">Home</a></li>
+    <ul :style="{ 'background-color': `rgba(94, 83, 67, ${navOpacity})` }" >
+      <li @click="determineLink('home')"><a :href="homeLink" :style="{ color: linkColor }">Home</a></li>
       <li><router-link :to="{ name: 'about' }" :style="{ color: linkColor }">About</router-link></li>
-      <li><a href="#Gallery" :style="{ color: linkColor }">Gallery</a></li>
-      <li><a href="#Contact" :style="{ color: linkColor }">Contact</a></li>
+      <li @click="determineLink('gallery')"><a :href="galleryLink" :style="{ color: linkColor }">Gallery</a></li>
+      <li @click="determineLink('contact')"><a :href="contactLink" :style="{ color: linkColor }">Contact</a></li>
     </ul>
   </nav>
 </template>
@@ -16,11 +16,10 @@ export default {
   name: 'NavbarBaby',
   data() {
     return {
-      navStyle: null,
       navOpacity: 0,
-      isOpen: null,
-      isLandscape: null,
-      homeLink: '/home'
+      homeLink: '/home',
+      galleryLink: '/home',
+      contactLink: '/home'
     };
   },
   computed: {
@@ -42,7 +41,9 @@ export default {
     // Listen for orientation change
     window.addEventListener("orientationchange", this.handleOrientationChange);
 
-    this.determineHomeUrl();
+    this.determineLink('home');
+    this.determineLink('gallery');
+    this.determineLink('contact');
   },
   methods: {
     vhToPixel(value) {
@@ -52,16 +53,34 @@ export default {
       const distanceFromTop = window.scrollY || window.pageYOffset;
       this.navOpacity = distanceFromTop / this.vhToPixel(15);
     },
-    determineHomeUrl() {
+    determineLink(link){
       const urlString = window.location.href;
       const urlStringLast4Chars = urlString.substring(urlString.length - 4);
       const urlStringLastChar = urlString.charAt(urlString.length - 1);
-      this.homeLink = (urlStringLast4Chars === 'home' || urlStringLastChar === '/') ? '#home' : '/home';
-    },
-    handleOrientationChange() {
-      this.isLandscape = window.matchMedia("(orientation: landscape)").matches;
-      this.navStyle = this.isLandscape ? 'landscape' : 'smallScreen';
-      this.isOpen = !this.isLandscape;
+      let AlreadyNavigated = urlString.indexOf('#') != -1;
+
+      console.log(urlStringLast4Chars);
+      console.log(urlStringLastChar);
+      console.log(AlreadyNavigated);
+
+      if(urlStringLast4Chars === 'home' || urlStringLastChar === '/' || AlreadyNavigated){
+        if (link === 'gallery'){
+          this.galleryLink = '#Gallery';
+          return;
+        }
+        if(link === 'contact'){
+          this.contactLink = '#Contact';
+          return;
+        }
+        if(link === 'home'){
+          this.homeLink =  '#Home';
+          return;
+        }
+      }
+      else{
+        this.homeLink = this.galleryLink = this.contactLink = '/home';
+        this.$emit('directTo',link);
+      }
     }
   }
 };

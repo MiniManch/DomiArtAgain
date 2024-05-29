@@ -1,5 +1,5 @@
 <template>
-  <LandscapeNavbar v-if="isLandscape" />
+  <LandscapeNavbar v-if="isLandscape" @directTo='directToPage'/>
   <MobileNavbar v-else />
   <router-view></router-view>
   <LandscapeFooter  />
@@ -30,6 +30,16 @@ export default {
       this.isMobile = window.innerWidth < 768; 
       // Check if the aspect ratio indicates landscape orientation
       this.isLandscape = window.innerWidth > window.innerHeight;
+    },
+    directToPage(page){
+      this.$router.push('/home').then(() => {
+        console.log('hello')
+        window.location.hash = `#${this.capitalizeFirst(page)}`;
+      });
+    },
+    capitalizeFirst(str) {
+      if (str.length === 0) return str; 
+      return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
     }
   },
   components:{
