@@ -1,12 +1,14 @@
 <template>
-  <LandscapeNavbar v-if="isLandscape" />
+  <LandscapeNavbar v-if="isLandscape" @clicked="directToPage" />
   <MobileNavbar v-else />
   <router-view></router-view>
+  <LandscapeFooter  />
 </template>
 
 <script>
 import LandscapeNavbar from "./components/General/Navbars/LandscapeNavbar.vue"
 import MobileNavbar from "./components/General/Navbars/MobileNavbar.vue";
+import LandscapeFooter from "./components/General/Footer/LandscapeFooter.vue";
 
 export default {
   name: 'App',
@@ -28,11 +30,40 @@ export default {
       this.isMobile = window.innerWidth < 768; 
       // Check if the aspect ratio indicates landscape orientation
       this.isLandscape = window.innerWidth > window.innerHeight;
+    },
+    scrollToSection(id) {
+      const element = document.getElementById(id);
+      if (element) {
+        const offsetTop = element.offsetTop;
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'  // Smooth scrolling animation
+        });
+      }
+    },
+    directToPage(url) {
+      const currentLocation = window.location.pathname;
+
+      if (currentLocation === '/') {
+        // If already on homepage, scroll to section
+        this.scrollToSection(url);
+      } else {
+        // Redirect to homepage and then scroll to section
+        this.$router.push('/');
+        this.$nextTick(() => {
+          this.scrollToSection(url);
+        });
+      }
+    },
+    capitalizeFirst(str) {
+      if (str.length === 0) return str; 
+      return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
     }
   },
   components:{
     LandscapeNavbar,
-    MobileNavbar
+    MobileNavbar,
+    LandscapeFooter
   }
   
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="home-container">
+  <div id='Home' class="home-container">
     <div class="left-side">
       <img src="../../../public/images/artistic/looking2.jpg" alt="">
     </div>

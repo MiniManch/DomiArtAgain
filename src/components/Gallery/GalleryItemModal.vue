@@ -52,7 +52,7 @@ export default {
             this.$nextTick(() => {
                 const magnifier = document.querySelector('.magnifier');
 
-                magnifier.style.left = mouseX + 200 + 'px'; 
+                magnifier.style.left = mouseX + 250 + 'px'; 
                 magnifier.style.top = mouseY  + 'px'; 
             });
         },
@@ -76,8 +76,8 @@ export default {
 .container {
     display: flex;
     justify-content: center;
-    align-items: center; /* Center the image vertically */
-    height: 100%; /* Ensure the container takes up the full height of its parent */
+    align-items: center;
+    height: 100%; 
     position: relative;
 }
 
@@ -92,8 +92,13 @@ export default {
     top:5vh;
     right:5vw;
     cursor: pointer; 
+    width:5vw;
 }
 
+.close > img{
+    width:100%;
+    height:100%;
+}
 .magnifier {
     position: absolute;
     width: 150px;
