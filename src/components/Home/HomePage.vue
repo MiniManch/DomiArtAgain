@@ -1,7 +1,7 @@
 <template>
   <div id='Home' class="home-container">
     <div class="left-side">
-      <img src="../../../public/images/artistic/looking2.jpg" alt="">
+      <img src="../../../public/images/artistic/Grid_no_bg.png" alt="">
     </div>
 
     <div class="right-side">

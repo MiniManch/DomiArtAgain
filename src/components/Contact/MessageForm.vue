@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <PopUpModal v-if="showModal" :title="modalTitle" :message="modalMessage" @close="closeModal" />
     <LoadingModal v-if="isLoading" />
     <div :class="['contact-form']">
@@ -22,79 +22,74 @@
   </div>
 </template>
 
-
 <script>
 import 'animate.css';
-import emailjs from 'emailjs-com';
 
 import PopUpModal from '../General/PopUpModal.vue';
 import LoadingModal from '../General/LoadingModal.vue';
 
 export default {
-  props: ['animation'],
   data() {
     return {
       email: '',
       subject: '',
       info: '',
-      showModal:false,
-      modalTitle:null,
-      modalMessage:null,
+      showModal: false,
+      modalTitle: null,
+      modalMessage: null,
       isLoading: false,
     };
   },
   methods: {
-    test(){
-      this.isLoading = true;
-    },
     async submitForm() {
-      if (!this.email || !this.subject || !this.info ) {
+      if (!this.email || !this.subject || !this.info) {
         alert('Please fill in all fields.');
         return;
       }
       this.isLoading = true;
       try {
-        const response = await emailjs.send(
-          'service_lzb1hea', 
-          'template_vi75s0q', 
-          {
+        const response = await fetch('/api/sendEmail', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
             to_email: this.email,
             subject: this.subject,
-            message: this.info,
-          },
-          'IPrktzaxEumc9aLIZ' 
-        );
-        
-        console.log('Email sent:', response);
+            message: this.info
+          })
+        });
+        if (!response.ok) {
+          throw new Error('Failed to send email');
+        }
+        const data = await response.json();
+        console.log('Email sent:', data);
         this.isLoading = false;
-        this.openModal('Email sent Successfully')
-        
+        this.openModal('Email sent Successfully');
         this.email = '';
         this.subject = '';
         this.info = '';
-        this.publicKey = '';
       } catch (error) {
         console.error('Error sending email:', error);
         this.openModal('Error sending email. Please try again later.');
       }
     },
-    openModal(title,message){
+    openModal(title, message) {
       this.modalTitle = title;
       this.modalMessage = message;
       this.showModal = true;
     },
-    closeModal(){
-      this.modalTitle= null;
+    closeModal() {
+      this.modalTitle = null;
       this.modalMessage = null;
       this.showModal = false;
     }
   },
-  components:{
+  components: {
     PopUpModal,
     LoadingModal
   }
-}
-
+};
 </script>
 
 <style scoped>
