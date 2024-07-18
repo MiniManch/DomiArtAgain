@@ -19,16 +19,12 @@ export default {
     }
   },
   mounted() {
-    // Detect screen size and orientation
     this.detectScreen();
-    // Add event listener to detect orientation change
     window.addEventListener('orientationchange', this.detectScreen);
   },
   methods: {
     detectScreen() {
-      // Check if the viewport width is less than a certain threshold to determine mobile
       this.isMobile = window.innerWidth < 768; 
-      // Check if the aspect ratio indicates landscape orientation
       this.isLandscape = window.innerWidth > window.innerHeight;
     },
     scrollToSection(id) {
@@ -37,7 +33,7 @@ export default {
         const offsetTop = element.offsetTop;
         window.scrollTo({
           top: offsetTop,
-          behavior: 'smooth'  // Smooth scrolling animation
+          behavior: 'smooth'  
         });
       }
     },
@@ -45,10 +41,8 @@ export default {
       const currentLocation = window.location.pathname;
 
       if (currentLocation === '/') {
-        // If already on homepage, scroll to section
         this.scrollToSection(url);
       } else {
-        // Redirect to homepage and then scroll to section
         this.$router.push('/');
         this.$nextTick(() => {
           this.scrollToSection(url);

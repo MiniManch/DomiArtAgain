@@ -52,7 +52,7 @@ export default {
             this.$nextTick(() => {
                 const magnifier = document.querySelector('.magnifier');
 
-                magnifier.style.left = mouseX + 250 + 'px'; 
+                magnifier.style.left = mouseX + 200 + 'px'; 
                 magnifier.style.top = mouseY  + 'px'; 
             });
         },
