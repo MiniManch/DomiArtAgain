@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     getItemData(id) {
-      fetch(`${process.env.VUE_APP_BACKEND_URL}/api/image/${id}`)
+      fetch(`${process.env.VUE_APP_BACKEND_URL}/image/${id}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
