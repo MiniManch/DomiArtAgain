@@ -34,7 +34,7 @@
         this.$router.push(`/admin/image/${id}`);
       },
       checkToken(){
-        axios.get(`/api/check-token`, {
+        axios.get(`${process.env.VUE_APP_BACKEND_URL}/check-token`, {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('DomiArt_token')}`
           }

@@ -49,7 +49,7 @@ export default {
 
   methods: {
     fetchData() {
-      axios.get('/api/images')
+      axios.get(`${process.env.VUE_APP_BACKEND_URL}/images`)
         .then(response => {
           this.data = response.data;
         })

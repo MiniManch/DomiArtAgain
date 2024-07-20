@@ -38,7 +38,7 @@ export default {
   methods: {
     async login() {
       try {
-        const response = await fetch('/api/login', {
+        const response = await fetch(`${process.env.VUE_APP_BACKEND_URL}/login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -63,7 +63,7 @@ export default {
     },
     async checkToken() {
       try {
-        const response = await axios.get(`/api/check-token`, {
+        const response = await axios.get(`${process.env.VUE_APP_BACKEND_URL}/check-token`, {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('DomiArt_token')}`
           }

@@ -24,7 +24,7 @@ export default {
             this.$router.push(url)
         },
         checkToken(){
-            axios.get(`/api/check-token`, {
+            axios.get(`${process.env.VUE_APP_BACKEND_URL}/check-token`, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('DomiArt_token')}`
             }

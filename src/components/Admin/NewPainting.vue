@@ -51,7 +51,7 @@
     methods: {
       async checkToken() {
         try {
-          await axios.get('/api/check-token', {
+          await axios.get(`${process.env.VUE_APP_BACKEND_URL}/check-token`, {
             headers: {
               'Authorization': `Bearer ${localStorage.getItem('DomiArt_token')}`
             }
@@ -77,7 +77,7 @@
         formData.append('file', file);
   
         try {
-          const response = await axios.put(`/api/image/${paintingID}/${field}`, formData, {
+          const response = await axios.put(`${process.env.VUE_APP_BACKEND_URL}/image/${paintingID}/${field}`, formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
               'Authorization': `Bearer ${localStorage.getItem('DomiArt_token')}`
@@ -97,7 +97,7 @@
           formData.append('link_1', this.selectedFiles.link_1);
           formData.append('link_2', this.selectedFiles.link_2);
   
-          await axios.post('/api/image', formData, {
+          await axios.post(`${process.env.VUE_APP_BACKEND_URL}/image`, formData, {
             headers: {
               'Authorization': `Bearer ${localStorage.getItem('DomiArt_token')}`
             }

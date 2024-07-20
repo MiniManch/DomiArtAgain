@@ -48,7 +48,7 @@ export default {
       }
       this.isLoading = true;
       try {
-        const response = await fetch('/api/sendEmail', {
+        const response = await fetch(`${process.env.VUE_APP_BACKEND_URL}/sendEmail`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

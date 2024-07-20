@@ -55,7 +55,7 @@ export default {
   methods: {
     fetchData() {
       const paintingID = this.$route.params.id;
-      axios.get(`/api/image/${paintingID}`)
+      axios.get(`${process.env.VUE_APP_BACKEND_URL}/image/${paintingID}`)
         .then(response => {
           this.painting = response.data;
         })
@@ -64,7 +64,7 @@ export default {
         });
     },
     checkToken() {
-      axios.get(`/api/check-token`, {
+      axios.get(`${process.env.VUE_APP_BACKEND_URL}/check-token`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('DomiArt_token')}`
         }
@@ -83,7 +83,7 @@ export default {
     },
     updateField(field, value) {
       const paintingID = this.$route.params.id;
-      axios.put(`/api/image/${paintingID}/${field}`, { value }, {
+      axios.put(`${process.env.VUE_APP_BACKEND_URL}/image/${paintingID}/${field}`, { value }, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('DomiArt_token')}`
         }
@@ -110,7 +110,7 @@ export default {
       formData.append('file', file);
 
       const paintingID = this.$route.params.id;
-      axios.put(`/api/image/${paintingID}/${field}`, formData, {
+      axios.put(`${process.env.VUE_APP_BACKEND_URL}/image/${paintingID}/${field}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${localStorage.getItem('DomiArt_token')}`
@@ -125,7 +125,7 @@ export default {
     },
     deletePainting() {
       const paintingID = this.$route.params.id;
-      axios.delete(`/api/image/${paintingID}`, {
+      axios.delete(`${process.env.VUE_APP_BACKEND_URL}/image/${paintingID}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('DomiArt_token')}`
         }
