@@ -9,7 +9,7 @@
       <div class="content">
         <h1 class="title"> <span>Dominique</span> <br> Lopez Rokah</h1>
         <h2 class="artist">Artist</h2>
-        <p class="text">I'm baby blackbird spyplane synth ascot celiac whatever. Pinterest yuccie single-origin coffee leggings iPhone blue bottle sartorial iceland cloud bread thundercats unicorn offal grailed butcher kale chips. </p>
+        <p class="text">Creating abstract beauty, that invites viewers to a joruney, throuhg a world of colors and shapes, one brush stroke at a time </p>
       </div>
     </div>
   </div>
