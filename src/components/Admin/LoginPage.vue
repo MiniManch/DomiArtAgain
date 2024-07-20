@@ -15,11 +15,12 @@
       </form>
       <p v-if="error">{{ error }}</p>
     </div>
-</div>
-
+  </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -27,6 +28,12 @@ export default {
       password: '',
       error: ''
     };
+  },
+  async mounted() {
+    const isValid = await this.checkToken();
+    if (isValid) {
+      this.$router.push('/admin');
+    }
   },
   methods: {
     async login() {
@@ -47,13 +54,28 @@ export default {
         }
 
         const data = await response.json();
-        console.log('Login successful', data);
+        localStorage.setItem('DomiArt_token', data.token);
 
-        localStorage.setItem('token', data.token);
-
-        // this.$router.push('/dashboard');
+        this.$router.push('/admin');
       } catch (err) {
         this.error = err.message;
+      }
+    },
+    async checkToken() {
+      try {
+        const response = await axios.get(`/api/check-token`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('DomiArt_token')}`
+          }
+        });
+        return response.status === 200;
+      } catch (error) {
+        if (error.response && error.response.status === 401) {
+          localStorage.removeItem('DomiArt_token');
+          this.$router.push('/admin/login');
+        }
+        console.error('Error checking token:', error);
+        return false;
       }
     }
   }
@@ -61,10 +83,9 @@ export default {
 </script>
 
 <style scoped>
-
-.containerOfAll{
-  width:100%;
-  height:100%;
+.containerOfAll {
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -65,7 +65,7 @@ export default {
       animating: false,
       animation: null,
       animation_duration: 1000,
-      maxPage: 3,
+      maxPage: 5,
       minPage: 1,
       showModal: false,
       modalData: null,
@@ -81,7 +81,7 @@ export default {
   computed: {
     paginatedItems() {
       const items = this.data.filter((item) => item.page == this.currentPage);
-      const sorted = items.sort((a, b) => Number(a.order) - Number(b.order));
+      const sorted = items.sort((a, b) => (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER));
       const pageStructure = this.structure.find((item) => item.page == this.currentPage);
       if (!pageStructure) return [];
       const structureArray = pageStructure.structure.split(' ').map(Number);

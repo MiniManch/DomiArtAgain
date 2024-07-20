@@ -52,7 +52,6 @@ export default {
       axios.get('/api/images')
         .then(response => {
           this.data = response.data;
-          console.log(this.data)
         })
         .catch(error => {
           console.error('Error fetching data:', error);
