@@ -5,11 +5,11 @@
         <div class="contact-ways">
           <div class="phone contact">
             <img src="../../../public/images/icons/contact/phone-50.png" alt="" class="icon">
-            <h3>+972-54-7232823</h3>
+            <h3>+972-54-6232911</h3>
           </div>
           <div class="email contact">
             <img src="../../../public/images/icons/contact/email-50.png" alt="" class="icon">
-            <h3>Email@Email.com</h3>
+            <h3>DomiAbstractArt@Gmail.com</h3>
           </div>
           <div class="message contact">
             <img src="../../../public/images/icons/contact/message-50.png" alt="" class="icon">
