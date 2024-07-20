@@ -2,7 +2,6 @@
     <GalleryItemModal v-if="this.displayModal" @close="openOtherImage" :data="this.itemData" :isMobileSrc="false"/>
     <LoadingModal v-if="isLoading" />
     <div v-if="this.itemData" class="total-wrapper">
-
         <div :class="['image',this.itemData.aspect]">
             <img :src="this.itemData.link_1" alt="" :class="[this.itemData.aspect]">
         </div>
@@ -12,7 +11,6 @@
             <h2 class="text">{{ this.itemData.text }}</h2>
 
             <img :src="this.itemData.link_2" alt="" class="other_image" @click="openOtherImage()" >
-
         </div>
     </div>
 </template>
@@ -37,26 +35,25 @@ export default {
   },
   mounted() {
     this.itemId = this.$router.currentRoute._rawValue.params.id;
-    this.getItemData('/data/GalleryImages.json', this.itemId); 
+    this.getItemData(this.itemId);
     this.isLoading = true;
-    setTimeout(()=>{
-      this.isLoading = false;
-    },1200)
   },
   methods: {
-    getItemData(url, id) {
-      fetch(url)
-        .then((response) => response.json())
-        .then((json) => {
-          const item = json.find(item => item.id == id);
-          if (item) {
-            this.itemData = item; 
-          } else {
-            console.error(`Item with ID ${this.itemId} not found.`);
+    getItemData(id) {
+      fetch(`${process.env.VUE_APP_BACKEND_URL}/api/image/${id}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
           }
+          return response.json();
+        })
+        .then((data) => {
+          this.itemData = data;
+          this.isLoading = false;
         })
         .catch((error) => {
-          console.error('Error fetching GalleryImages.json:', error);
+          console.error('Error fetching item data:', error);
+          this.isLoading = false;
         });
     },
     openOtherImage(){
