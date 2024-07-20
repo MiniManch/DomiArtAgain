@@ -9,7 +9,10 @@
           </div>
           <div class="email contact">
             <img src="../../../public/images/icons/contact/email-50.png" alt="" class="icon">
-            <h3>DomiAbstractArt@Gmail.com</h3>
+            <div class="email-text">
+            <h3>DomiAbstractArt</h3>
+            <h3>@Gmail.com</h3>
+            </div>
           </div>
           <div class="message contact">
             <img src="../../../public/images/icons/contact/message-50.png" alt="" class="icon">
@@ -78,11 +81,16 @@
     height:50%;
   }
   
+  .email-text{
+    margin-left:2vw;
+  }
   .contact {
     display: flex;
     flex-direction: row;
     align-items: center;
     width:100%;
+
+    font-size: 0.8em;
 
     background-color: rgb(94, 83, 67,0.6);
     padding:1vh;
