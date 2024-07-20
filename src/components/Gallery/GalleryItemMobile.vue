@@ -31,22 +31,24 @@ export default {
   },
   mounted() {
     this.itemId = this.$router.currentRoute._rawValue.params.id;
-    this.getItemData('/data/GalleryImages.json', this.itemId); 
+    this.getItemData(this.itemId);
   },
   methods: {
-    getItemData(url, id) {
-      fetch(url)
-        .then((response) => response.json())
-        .then((json) => {
-          const item = json.find(item => item.id == id);
-          if (item) {
-            this.itemData = item; 
-          } else {
-            console.error(`Item with ID ${this.itemId} not found.`);
+    getItemData(id) {
+      fetch(`${process.env.VUE_APP_BACKEND_URL}/api/image/${id}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
           }
+          return response.json();
+        })
+        .then((data) => {
+          this.itemData = data;
+          this.isLoading = false;
         })
         .catch((error) => {
-          console.error('Error fetching GalleryImages.json:', error);
+          console.error('Error fetching item data:', error);
+          this.isLoading = false;
         });
     },
     openOtherImage(){
