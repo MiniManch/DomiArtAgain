@@ -78,6 +78,7 @@ export default {
       this.modalTitle = title;
       this.modalMessage = message;
       this.showModal = true;
+      console.log('title:',title,'message',message);
     },
     closeModal() {
       this.modalTitle = null;

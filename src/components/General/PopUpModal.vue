@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-overlay">
+  <div :class="['modal-overlay', isMobile ? 'mobile' : null]">
     <div class="Modal">
       <div class="modal-header">
         <h2>{{ title }}</h2>
@@ -22,14 +22,27 @@ export default {
       type: String,
     }
   },
+  mounted() {
+    this.detectScreen();
+    console.log('title from modal', this.title);
+    console.log('message from modal', this.message);
+  },
+  data() {
+    return {
+      isMobile: null,
+    };
+  },
   methods: {
     closeModal() {
       this.$emit('close');
-    }
+    },
+    detectScreen() {
+      this.isMobile = window.innerWidth < 768; 
+      this.isLandscape = window.innerWidth > window.innerHeight;
+    },
   }
 };
 </script>
-
 <style scoped>
 .modal-overlay {
   position: fixed;
@@ -58,6 +71,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
+  color: #5E5343;
 }
 
 .modal-header h2 {
@@ -96,5 +110,9 @@ export default {
 
 .modal-body button:hover {
   background-color: #725f4e;
+}
+
+.mobile > .Modal{
+  width:50vw;
 }
 </style>
