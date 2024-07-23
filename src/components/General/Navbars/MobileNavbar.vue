@@ -1,14 +1,14 @@
 <template>
   <nav class="navbar-fixed">
-    <div :class="['hamburger-icon','animate__animated',hamburgerAnimation]" @click=" animating ? null : toggleNavbar('open')" v-if="!animating && !isOpen" @scroll="Handlescroll">
+    <div :class="['hamburger-icon','animate__animated',hamburgerAnimation]" @click="animating ? null : toggleNavbar('open')" v-if="!animating && !isOpen" @scroll="Handlescroll">
       <img src="../../../../public/images/icons/menu/menu.png" alt="Menu">
     </div>
     <ul :class="[isOpen ? 'navbar-open' : null, animating ? animation : null, 'animate__animated' ]" v-if="isOpen || animating" class="animated-navbar">
       <li @click="toggleNavbar('close')" class="closeButton">X</li>
-      <li><router-link :to="{ name: 'home' }">Home</router-link></li>
-      <li><router-link :to="{ name: 'about' }">About</router-link></li>
-      <li><a href="#Gallery">Gallery</a></li>
-      <li><a href="#Contact">Contact</a></li>
+      <li @click="navigateToSection('Home')">Home</li>
+      <li @click="navigateToSection('Home')">About</li>
+      <li @click="navigateToSection('Gallery')">Gallery</li>
+      <li @click="navigateToSection('Contact')">Contact</li>
     </ul>
   </nav>
 </template>
@@ -47,6 +47,26 @@ export default {
         this.hamburgerAnimation = 'animate__fadeIn';
       }
     },
+    navigateToSection(sectionId) {
+      if (this.$route.name !== 'home') {
+        this.$router.push({ name: 'home' }).then(() => {
+          setTimeout(() => {
+            this.scrollToSection(sectionId);
+          }, 300); // 0.5 second delay
+        });
+      } else {
+        this.scrollToSection(sectionId);
+      }
+    },
+    scrollToSection(sectionId) {
+      this.$nextTick(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+          this.toggleNavbar('close'); // Close the navbar after navigating
+        }
+      });
+    },
   }
 }
 </script>
@@ -79,15 +99,15 @@ li {
   font-size: 1.5em;
   display: flex;
   justify-content: flex-start;
-}
-li:last-child {
-  padding-bottom: 1vh;
-}
-a {
+  cursor: pointer;
   text-decoration: none;
   font-family: "Playfair Display", serif;
   color: #EFE9E4;
 }
+li:last-child {
+  padding-bottom: 1vh;
+}
+
 .closeButton {
   width: fit-content;
   color: #EFE9E4;

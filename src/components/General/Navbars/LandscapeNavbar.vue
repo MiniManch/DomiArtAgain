@@ -1,16 +1,16 @@
 <template>
   <nav :class="navStyle">
     <ul :style="{ 'background-color': `rgba(94, 83, 67, ${navOpacity})` }">
-      <li @click="clickLink('Home')"> 
+      <li @click="navigateToSection('Home')"> 
         <a :style="{ color: linkColor }">Home</a>
       </li>
-      <li @click="clickLink('Home')">
+      <li @click="navigateToSection('Home')">
         <a :style="{ color: linkColor }">About</a>
       </li>
-      <li @click="clickLink('Gallery')">
+      <li @click="navigateToSection('Gallery')">
         <a :style="{ color: linkColor }">Gallery</a>
       </li>
-      <li @click="clickLink('Contact')">
+      <li @click="navigateToSection('Contact')">
          <a :style="{ color: linkColor }">Contact</a>
       </li>
     </ul>
@@ -45,8 +45,24 @@ export default {
       const distanceFromTop = window.scrollY || window.pageYOffset;
       this.navOpacity = distanceFromTop / this.vhToPixel(15);
     },
-    clickLink(url){
-      this.$emit('clicked', url);
+    navigateToSection(sectionId) {
+      if (this.$route.name !== 'home') {
+        this.$router.push({ name: 'home' }).then(() => {
+          setTimeout(() => {
+            this.scrollToSection(sectionId);
+          }, 300); // 0.5 second delay
+        });
+      } else {
+        this.scrollToSection(sectionId);
+      }
+    },
+    scrollToSection(sectionId) {
+      this.$nextTick(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
     }
   }
 };
