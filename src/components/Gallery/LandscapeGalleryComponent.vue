@@ -64,7 +64,7 @@ export default {
       structure: ImageStructure,
       animating: false,
       animation: null,
-      animation_duration: 500,
+      animation_duration: 1000,
       maxPage: 5,
       minPage: 1,
       showModal: false,
