@@ -5,31 +5,64 @@
       <form @submit.prevent="submitForm">
         <div class="form-group">
           <label for="title">Title</label>
-          <input type="text" id="title" v-model="painting.title" class="form-control" required />
-          <button type="button" class="btn btn-primary save-field" @click="updateField('title', painting.title)">Save Title</button>
+          <div class="input-group">
+            <input type="text" id="title" v-model="painting.title" class="form-control" required />
+            <button type="button" class="btn btn-primary save-field" @click="updateField('title', painting.title)">Save Title</button>
+          </div>
         </div>
         <div class="form-group">
           <label for="year">Year</label>
-          <input type="text" id="year" v-model="painting.year" class="form-control" required />
-          <button type="button" class="btn btn-primary save-field" @click="updateField('year', painting.year)">Save Year</button>
+          <div class="input-group">
+            <input type="text" id="year" v-model="painting.year" class="form-control" required />
+            <button type="button" class="btn btn-primary save-field" @click="updateField('year', painting.year)">Save Year</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="aspect">Aspect</label>
+          <div class="input-group">
+            <input type="text" id="aspect" v-model="painting.aspect" class="form-control" required />
+            <button type="button" class="btn btn-primary save-field" @click="updateField('aspect', painting.aspect)">Save Aspect</button>
+          </div>
         </div>
         <div class="form-group">
           <label for="text">Description</label>
-          <textarea id="text" v-model="painting.text" class="form-control" required></textarea>
-          <button type="button" class="btn btn-primary save-field" @click="updateField('text', painting.text)">Save Description</button>
+          <div class="input-group">
+            <textarea id="text" v-model="painting.text" class="form-control" required></textarea>
+            <button type="button" class="btn btn-primary save-field" @click="updateField('text', painting.text)">Save Description</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="page">Page</label>
+          <div class="input-group">
+            <input type="text" id="page" v-model="painting.page" class="form-control" required />
+            <button type="button" class="btn btn-primary save-field" @click="updateField('page', painting.page)">Save Page</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="order">Order</label>
+          <div class="input-group">
+            <input type="text" id="order" v-model="painting.order" class="form-control" required />
+            <button type="button" class="btn btn-primary save-field" @click="updateField('order', painting.order)">Save Order</button>
+          </div>
         </div>
         <div class="form-group">
           <label for="link_1">Primary Image</label>
-          <input type="file" id="link_1" @change="onFileChange($event, 'link_1')" class="form-control-file" />
-          <button type="button" class="btn btn-primary save-field" @click="uploadFile('link_1')">Save Primary Image</button>
+          <div class="input-group">
+            <input type="file" id="link_1" @change="onFileChange($event, 'link_1')" class="form-control-file" />
+            <button type="button" class="btn btn-primary save-field" @click="uploadFile('link_1')">Save Primary Image</button>
+          </div>
         </div>
         <div class="form-group">
           <label for="link_2">Secondary Image</label>
-          <input type="file" id="link_2" @change="onFileChange($event, 'link_2')" class="form-control-file" />
-          <button type="button" class="btn btn-primary save-field" @click="uploadFile('link_2')">Save Secondary Image</button>
+          <div class="input-group">
+            <input type="file" id="link_2" @change="onFileChange($event, 'link_2')" class="form-control-file" />
+            <button type="button" class="btn btn-primary save-field" @click="uploadFile('link_2')">Save Secondary Image</button>
+          </div>
         </div>
-        <button type="button" class="btn btn-danger" @click="deletePainting">Delete Painting</button>
-        <button type="button" class="btn btn-warning cancel" @click="cancelEdit">Cancel</button>
+        <div class="button-group">
+          <button type="button" class="btn btn-danger" @click="deletePainting">Delete Painting</button>
+          <button type="button" class="btn btn-warning" @click="cancelEdit">Cancel</button>
+        </div>
       </form>
     </div>
   </div>
@@ -69,8 +102,7 @@ export default {
           'Authorization': `Bearer ${localStorage.getItem('DomiArt_token')}`
         }
       })
-      .then(response => {
-        console.log(response);
+      .then(()=> {
         this.authorized = true;
       })
       .catch(error => {
@@ -141,9 +173,6 @@ export default {
         console.error('Error deleting painting:', error);
       });
     },
-    submitForm() {
-      console.log('Form submitted');
-    },
     cancelEdit() {
       this.checkToken();
       this.$router.push('/admin');
@@ -154,12 +183,14 @@ export default {
 
 <style scoped>
 .containerOfAll {
+  padding-top: 10vh;
+  padding-bottom:5vh;
   width: 100vw;
-  min-height: 110vh;
+  min-height: 120vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color:#EFE9E4 ;
+  background-color: #EFE9E4;
 }
 .edit-form-container {
   max-width: 600px;
@@ -175,7 +206,21 @@ form {
   flex-direction: column;
   gap: 2vw;
 }
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5vw;
+}
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+}
 .save-field {
-  margin-top: 10px;
+  margin-left: 10px;
+}
+.button-group {
+  display: flex;
+  justify-content: space-between;
 }
 </style>

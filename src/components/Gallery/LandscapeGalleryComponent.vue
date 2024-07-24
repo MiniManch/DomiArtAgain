@@ -18,16 +18,15 @@
         :class="['gallery', `gallery_page_${currentPage}`, 'animate__animated', animating ? animation : null]"
       >
         <template v-for="(rowItems, rowIndex) in paginatedItems" :key="rowIndex">
-          <div :class="[`page_${currentPage}_row_${rowIndex + 1}`, 'GalleryRow']">
+          <div :class="[currentPage > 3 ? 'default-row-styling': null,`page_${currentPage}_row_${rowIndex + 1}`, 'GalleryRow']">
             <template v-for="(item, itemIndex) in rowItems" :key="itemIndex">
-              <div :class="`item_${item.id}`" class="item">
+              <div :class="`item_${item.id}`" class="item" @click="openImage(item.id)">
                 <!-- Image -->
                 <img
                   :id="`painting_${item.id}`"
                   :class="['image', item.aspect, animating ? 'animating' : null]"
                   :src="item.link_1"
                   alt="Gallery Image"
-                  @click="openImage(item.id)"
                 />
                 <!-- Image title template -->
                 <div class="imageTitleTemplate" :style="{ bottom: item.aspect === 'horizontal' ? '8vh' : '6vh' }">
@@ -64,7 +63,7 @@ export default {
       structure: ImageStructure,
       animating: false,
       animation: null,
-      animation_duration: 1000,
+      animation_duration: 600,
       maxPage: 5,
       minPage: 1,
       showModal: false,
@@ -80,10 +79,14 @@ export default {
   },
   computed: {
     paginatedItems() {
-      const items = this.data.filter((item) => item.page == this.currentPage);
+      // Get items that match the current page
+      let items = this.data.filter((item) => item.page == this.currentPage && item.order);
+      console.log(items)
+      // Sort the items by order
       const sorted = items.sort((a, b) => (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER));
+      // Get the structure for the current page
       const pageStructure = this.structure.find((item) => item.page == this.currentPage);
-      if (!pageStructure) return [];
+      // Convert the structure into an array of numbers
       const structureArray = pageStructure.structure.split(' ').map(Number);
       return convertArrays(sorted, structureArray);
     },
@@ -142,6 +145,9 @@ export default {
 </script>
 
 <style scoped>
+*{
+  animation-duration:0.6s;
+}
 h1 {
   color: #5e5343;
   font-family: 'Playfair Display', serif;
@@ -161,7 +167,8 @@ h1 {
   justify-content: center;
   width: 100%;
 }
-.page_1_row_1 {
+
+.GalleryRow.page_1_row_1 {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -169,47 +176,69 @@ h1 {
   justify-content: flex-end;
   margin-right: 2vw;
 }
-.page_1_row_2 {
+.GalleryRow.page_1_row_2 {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
 }
-.gallery_page_2 {
+.gallery_page_2,.gallery_page_4,.gallery_page_5 {
   flex-direction: column;
 }
-.page_2_row_1 {
+.GalleryRow.page_2_row_1 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 20px;
   margin-right: 2vw;
 }
-.page_2_row_2 {
+.GalleryRow.page_2_row_2 {
   display: flex;
   flex-direction: row;
   gap: 20px;
   justify-content: center;
 }
-.page_2_row_2 {
+.GalleryRow.page_2_row_2 {
   display: flex;
   flex-direction: row;
   gap: 20px;
   justify-content: center;
 }
-.page_3_row_1 {
+.GalleryRow.page_3_row_1 {
   display: flex;
   justify-content: center;
   flex-direction: column;
   gap: 20px;
   margin-right: 2vw;
 }
-.page_3_row_3 {
+.GalleryRow.page_3_row_3 {
   display: flex;
   justify-content: center;
   flex-direction: column;
   gap: 20px;
   margin-left: 2vw;
+}
+
+.GalleryRow.page_4_row_1 {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-right: 2vw;
+}
+.GalleryRow.page_4_row_2 {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+.GalleryRow.page_5_row_1 {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-right: 2vw;
+}
+.GalleryRow.page_5_row_2 {
+  display: flex;
+  justify-content: center;
 }
 .GalleryRow {
   margin-bottom: 20px;
@@ -251,7 +280,7 @@ h1 {
   padding-bottom: 10vh;
 }
 .imageTitleTemplate {
-  background-color: rgba(94, 83, 67, 0.8);
+  background-color: rgba(94, 83, 67, 0.9);
   height: 4vh;
   width: 80%;
   position: relative;
@@ -262,12 +291,13 @@ h1 {
   text-align: center;
   transition: opacity 0.5s ease;
   opacity: 0;
+  cursor:pointer;
 }
 .item:hover .imageTitleTemplate {
   opacity: 1;
 }
 
 .disabled{
-  opacity:0.3;
+  opacity:0.5;
 }
 </style>

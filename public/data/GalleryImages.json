@@ -73,8 +73,8 @@
     "text": "110/80 cm  Acrylic on Canvas.",
     "title": "OROT RABIN",
     "year": "2019",
-    "page": "",
-    "order": ""
+    "page": "4",
+    "order": "2"
   },
   {
     "id": 1011,
@@ -84,8 +84,8 @@
     "text": "90/70 cm  Acrylic on Canvas.",
     "title": "La FOULE",
     "year": "2023",
-    "page": "",
-    "order": "1"
+    "page": "4",
+    "order": "3"
   },
   {
     "id": 1012,
@@ -161,8 +161,8 @@
     "text": "100/90 cm Acrylic on Canvas.",
     "title": "BLOH",
     "year": "2017",
-    "page": "",
-    "order": "2"
+    "page": "4",
+    "order": "1"
   },
   {
     "id": 1023,
@@ -173,18 +173,18 @@
     "title": "INNER BEAUTY",
     "year": "2024",
     "page": "4",
-    "order": ""
+    "order": "4"
   },
   {
     "id": 1028,
     "link_1": "https://res.cloudinary.com/drzcke4vu/image/upload/v1712330822/DomiArt/28/pngcyl7rkyqzhntbjy6f.png",
     "link_2": "https://res.cloudinary.com/drzcke4vu/image/upload/v1712330811/DomiArt/28/fzkxzkl9xx060xbx7ydu.jpg",
-    "aspect": "horizontal",
+    "aspect": "square",
     "text": "120/80 cm. Acrylic on Canvas.",
     "title": "NEBULA",
     "year": "2016",
-    "page": "4",
-    "order": ""
+    "page": "5",
+    "order": "1"
   },
   {
     "id": 1029,
@@ -194,8 +194,8 @@
     "text": "100/90 cm. Acrylic on Canvas.",
     "title": "CONTACT",
     "year": "2020",
-    "page": "4",
-    "order": ""
+    "page": "5",
+    "order": "4"
   },
   {
     "id": 1030,
@@ -216,8 +216,8 @@
     "text": "",
     "title": "Waterfall Melody",
     "year": "2021",
-    "page": "",
-    "order": ""
+    "page": "4",
+    "order": "4"
   },
   {
     "id": 1020,
@@ -227,8 +227,8 @@
     "text": "100/40 cm. Acrylic on Canvas.",
     "title": "NEO CITY",
     "year": "2019",
-    "page": "",
-    "order": ""
+    "page": "5",
+    "order": "3"
   },
   {
     "id": 1017,
@@ -238,8 +238,8 @@
     "text": "140/50 cm. Acrylic on Canvas.",
     "title": "XENA 2",
     "year": "2023",
-    "page": "",
-    "order": "3"
+    "page": "5",
+    "order": "2"
   },
   {
     "id": 1026,

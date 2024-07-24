@@ -10,5 +10,13 @@
     {
         "page": "3",
         "structure":"2 1 2"
+    },
+    {
+        "page": "4",
+        "structure":"2 2"
+    },
+    {
+        "page": "5",
+        "structure":"2 3"
     }
 ]
