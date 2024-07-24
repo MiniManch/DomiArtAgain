@@ -41,4 +41,9 @@ export default {
         color: #EFE9E4; 
         font-size:1.2em;
     }
+    .socials{
+        display:flex;
+        gap:1vw;
+        justify-content: center;
+    }
 </style>

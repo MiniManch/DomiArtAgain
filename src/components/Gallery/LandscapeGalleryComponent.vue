@@ -267,4 +267,8 @@ h1 {
 .item:hover .imageTitleTemplate {
   opacity: 1;
 }
+
+.disabled{
+  opacity:0.3;
+}
 </style>
