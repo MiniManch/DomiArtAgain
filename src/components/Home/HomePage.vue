@@ -9,7 +9,7 @@
       <div class="content">
         <h1 class="title"> <span>Dominique</span> <br> Lopez Rokah</h1>
         <h2 class="artist">Artist</h2>
-        <p class="text">Creating abstract beauty, that invites viewers to a joruney, throuhg a world of colors and shapes, one brush stroke at a time </p>
+        <p class="text">Creating abstract beauty, that invites viewers to a joruney, through a world of colors and shapes, one brush stroke at a time </p>
       </div>
     </div>
   </div>
