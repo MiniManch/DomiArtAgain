@@ -63,7 +63,7 @@ export default {
 }
 </script>
 
-<style>
+<style> 
 body{
   margin:0;
   padding:0;
@@ -71,6 +71,7 @@ body{
   -moz-osx-font-smoothing: grayscale;
   height:100vh;
   overflow-x: hidden;
+  user-select:none;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

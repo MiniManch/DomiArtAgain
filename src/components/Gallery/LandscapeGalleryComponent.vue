@@ -64,7 +64,7 @@ export default {
       structure: ImageStructure,
       animating: false,
       animation: null,
-      animation_duration: 1000,
+      animation_duration: 500,
       maxPage: 5,
       minPage: 1,
       showModal: false,
@@ -142,7 +142,6 @@ export default {
 </script>
 
 <style scoped>
-/* Add your styles here */
 h1 {
   color: #5e5343;
   font-family: 'Playfair Display', serif;
@@ -252,7 +251,7 @@ h1 {
   padding-bottom: 10vh;
 }
 .imageTitleTemplate {
-  background-color: rgba(94, 83, 67, 0.7);
+  background-color: rgba(94, 83, 67, 0.8);
   height: 4vh;
   width: 80%;
   position: relative;
