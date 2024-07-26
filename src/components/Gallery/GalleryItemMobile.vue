@@ -63,10 +63,8 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 .total-wrapper{
-  width:80vw;
-  height:100vh;
-
-  margin-left:10vw;
+  width:100vw;
+  height:90vh;
 
   display:flex;
   flex-direction:column;
@@ -80,20 +78,18 @@ export default {
 }
 
 .image{
-  width:100%;
-  height:100%;
+  width:fit-content;
+  height:fit-content;
 
   display:inline-block;
 }
 
 .square{
     width:100%;
-    height:80%;
 }
 
 .vertical{
-  height:60vh;
-  margin-top: 5vh;
+  height:45vh;
 }
 
 .image.vertical{
@@ -123,7 +119,6 @@ export default {
 
 .image > img{
   max-height:90%;
-  margin-top:5%;
 }
 
 img.horizontal{

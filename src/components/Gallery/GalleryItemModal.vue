@@ -118,4 +118,17 @@ export default {
     transform: translate(-50%, -50%);
     transition: all 0s ease-in-out;
 }
+
+@media screen and (max-width: 600px) {
+    .container{
+        height:80%;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .close {
+        height:50px;
+        width:50px;
+
+    }
+}
 </style>
