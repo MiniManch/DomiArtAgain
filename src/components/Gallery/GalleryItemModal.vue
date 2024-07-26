@@ -1,8 +1,8 @@
 <template>
-    <div class="overlay" >
+    <div class="overlay">
         <div class="container">
-            <img :src="data.link_2" alt="" class="image" ref="imageRef" @mousemove="handleMouseMove" @mouseout="handleMouseOut" >
-            <div v-if="showMagnifier" class="magnifier" :style="{ backgroundImage: 'url(' + data.link_2 + ')', backgroundPosition: magnifierPosition }"></div>
+            <img :src="data.link_2" alt="" class="image" ref="imageRef" @mousemove="handleMouseMove" @mouseout="handleMouseOut">
+            <div v-if="showMagnifier" class="magnifier" :style="{ backgroundImage: 'url(' + data.link_2 + ')', backgroundPosition: magnifierPosition, left: magnifierLeft, top: magnifierTop }"></div>
         </div>
         <div class="close" @click="closeModal">
             <img :src="closeBtnSrc" alt="cancel"/>
@@ -24,14 +24,16 @@ export default {
         return {
             showMagnifier: false,
             magnifierPosition: '0% 0%',
+            magnifierLeft: '0vw',
+            magnifierTop: '0vw',
             closeBtnSrc: null,
         };
     },
     mounted() {
         this.closeBtnSrc = this.isMobileSrc ? '/images/icons/close/50.png' : '/images/icons/close/100.png';
     },
-    methods:{
-        closeModal(){
+    methods: {
+        closeModal() {
             this.$emit('close');
         },
         handleMouseMove(event) {
@@ -44,22 +46,25 @@ export default {
             const imageHeight = this.$refs.imageRef.clientHeight;
 
             const magnifierWidth = (mouseX / imageWidth) * 100;
-            const magnifierHeight = (mouseY / imageHeight) * 100 ;
+            const magnifierHeight = (mouseY / imageHeight) * 100;
 
             this.magnifierPosition = `${magnifierWidth}% ${magnifierHeight}%`;
             this.showMagnifier = true;
 
-            this.$nextTick(() => {
-                const magnifier = document.querySelector('.magnifier');
+            // Convert mouseX and mouseY to vw units
+            const screenWidth = window.innerWidth;
+            const vwMouseX = (mouseX / screenWidth) * 100;
+            const vwMouseY = (mouseY / screenWidth) * 100;
 
-                magnifier.style.left = mouseX + 200 + 'px'; 
-                magnifier.style.top = mouseY  + 'px'; 
-            });
+            // Calculate the equivalent of 400 pixels in vw units
+            const offsetVW = (400 / screenWidth) * 100;
+
+            this.magnifierLeft = `calc(${vwMouseX}vw + ${offsetVW}vw)`;
+            this.magnifierTop = `${vwMouseY}vw`;
         },
-        handleMouseOut(){
+        handleMouseOut() {
             this.showMagnifier = false;
         }
-
     }
 }
 </script>
@@ -70,14 +75,14 @@ export default {
     position: absolute;
     width: 100vw;
     height: 100vh;
-    background-color: rgb(94, 83, 67,0.8);
+    background-color: rgba(94, 83, 67, 0.8);
 }
 
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%; 
+    height: 100%;
     position: relative;
 }
 
@@ -87,18 +92,19 @@ export default {
     min-width: 35vw;
 }
 
-.close{
+.close {
     position: absolute;
-    top:5vh;
-    right:5vw;
-    cursor: pointer; 
-    width:5vw;
+    top: 5vh;
+    right: 5vw;
+    cursor: pointer;
+    width: 5vw;
 }
 
-.close > img{
-    width:100%;
-    height:100%;
+.close > img {
+    width: 100%;
+    height: 100%;
 }
+
 .magnifier {
     position: absolute;
     width: 150px;
@@ -112,5 +118,4 @@ export default {
     transform: translate(-50%, -50%);
     transition: all 0s ease-in-out;
 }
-
 </style>
