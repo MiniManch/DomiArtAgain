@@ -99,6 +99,7 @@
   
   .contact > h3 {
     margin-left: 2vw;
+    padding-top:1vh;
   }
   
   .message > h3 {
@@ -115,6 +116,7 @@
     align-items: flex-start;
   }
   .messageContent{
+    padding-top:3vh;
     position: relative;
     display:flex;
     flex-direction: column;

@@ -95,7 +95,6 @@ export default {
 
 <style scoped>
 .contact-form {
-  width: 20vw;
   margin: 0 auto;
   margin-left: 5vh;
 }
@@ -123,7 +122,7 @@ textarea {
 }
 
 textarea {
-  height: 20vh;
+  height: 30vh;
   resize: none;
 }
 
