@@ -4,9 +4,6 @@
       <li @click="navigateToSection('Home')"> 
         <a :style="{ color: linkColor }">Home</a>
       </li>
-      <li @click="navigateToSection('Home')">
-        <a :style="{ color: linkColor }">About</a>
-      </li>
       <li @click="navigateToSection('Gallery')">
         <a :style="{ color: linkColor }">Gallery</a>
       </li>

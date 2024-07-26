@@ -15,9 +15,11 @@
             </div>
           </div>
           <div class="message contact">
-            <img src="../../../public/images/icons/contact/message-50.png" alt="" class="icon">
+            <div>
+              <img src="../../../public/images/icons/contact/message-50.png" alt="" class="icon">
+              <h3>Send us a message!</h3>
+            </div>
             <div class="messageContent">
-                <h3>Send us a message!</h3>
                 <MessageForm/>
             </div>
           </div>
@@ -100,10 +102,8 @@
     margin-left: 2vw;
   }
   
-  .message > h3 {
-    text-decoration: underline;
-    cursor: pointer;
-    transition: all 0.5s;
+  .message >div> h3 {
+    padding-top: 1vh;
   }
   
   .message > h3:hover {
@@ -111,18 +111,25 @@
   }
   .message{
     display: flex;
-    align-items: flex-start;
+    flex-direction: column;
+  }
+  .message > div{
+    display: flex;
+    flex-direction: row;
+    gap:2vw;
   }
   .messageContent{
     position: relative;
     display:flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: flex-end;
   }
   .messageContent>h3{
     margin-bottom: 3vh;
     margin-left: 2vw;
     width:fit-content;
   }
+
   </style>
   

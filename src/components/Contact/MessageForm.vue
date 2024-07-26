@@ -12,7 +12,7 @@
           <label for="subject">Subject:</label>
           <input type="text" id="subject" v-model.trim="subject" required>
         </div>
-        <div class="form-group">
+        <div class="form-group textArea">
           <label for="info">Message:</label>
           <textarea id="info" v-model.trim="info" rows="5" cols="30" required></textarea>
         </div>
@@ -78,7 +78,7 @@ export default {
       this.modalTitle = title;
       this.modalMessage = message;
       this.showModal = true;
-      console.log('title:',title,'message',message);
+      console.log('title:', title, 'message', message);
     },
     closeModal() {
       this.modalTitle = null;
@@ -95,7 +95,7 @@ export default {
 
 <style scoped>
 .contact-form {
-  width:20vw;
+  width: 20vw;
   margin: 0 auto;
   margin-left: 5vh;
 }
@@ -116,14 +116,15 @@ textarea {
   width: 100%;
   padding: 8px;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: 3px solid transparent; /* Set initial transparent border */
   border-radius: 4px;
   box-sizing: border-box;
+  transition: border-color 0.3s; /* Smooth transition for border-color */
 }
 
 textarea {
-  height:20vh;
-  resize: none; 
+  height: 20vh;
+  resize: none;
 }
 
 button {
@@ -141,28 +142,35 @@ button:hover {
   transform: scale(1.05); /* Scale the button slightly on hover */
 }
 
-.upper{
+.upper {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.upper>img{
-  width:30px;
+.upper > img {
+  width: 30px;
 }
 
 textarea:focus,
 input[type="text"]:focus,
 input[type="email"]:focus {
-  border-color: #5E5343; 
   outline: none;
-  border-width: 3px;
+  border-color: #5E5343; /* Change border color on focus */
 }
 
 @media only screen and (max-width: 600px) and (orientation: portrait) {
   .contact-form {
-    width:50vw;
+    width: 70vw;
     margin: 0 auto;
   }
+
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    border-width: 5px;
+  }
 }
+
+
 </style>

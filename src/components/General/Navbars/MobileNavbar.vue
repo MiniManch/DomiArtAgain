@@ -6,7 +6,6 @@
     <ul :class="[isOpen ? 'navbar-open' : null, animating ? animation : null, 'animate__animated' ]" v-if="isOpen || animating" class="animated-navbar">
       <li @click="toggleNavbar('close')" class="closeButton">X</li>
       <li @click="navigateToSection('Home')">Home</li>
-      <li @click="navigateToSection('Home')">About</li>
       <li @click="navigateToSection('Gallery')">Gallery</li>
       <li @click="navigateToSection('Contact')">Contact</li>
     </ul>
