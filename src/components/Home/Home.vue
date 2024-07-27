@@ -4,7 +4,7 @@
 
     <!-- Gallery -->
     <LandscapeGallery :data="data" v-if="isLandscape" />
-    <MobileGallery :images="data" v-else />
+    <MobileGallery :data="data" v-if="!isLandscape && this.data.length > 0" />
 
     <!-- Contact -->
     <LandscapeContactPage v-if="isLandscape" />
@@ -38,9 +38,9 @@ export default {
     MobileGalleryContactPage,
   },
   
-  mounted() {
+  async mounted() {
     // Fetch data from the backend
-    this.fetchData();
+    await this.fetchData();
     // Detect screen size and orientation
     this.detectScreen();
     // Add event listener to detect orientation change
@@ -48,14 +48,13 @@ export default {
   },
 
   methods: {
-    fetchData() {
-      axios.get(`${process.env.VUE_APP_BACKEND_URL}/images`)
-        .then(response => {
-          this.data = response.data;
-        })
-        .catch(error => {
-          console.error('Error fetching data:', error);
-        });
+    async fetchData() {
+      try {
+        const response = await axios.get(`${process.env.VUE_APP_BACKEND_URL}/images`);
+        this.data = response.data;
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     },
     
     detectScreen() {
@@ -66,6 +65,7 @@ export default {
     },
   },
 };
+
 </script>
 
 <style>

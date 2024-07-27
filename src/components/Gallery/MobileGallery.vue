@@ -35,12 +35,6 @@
 import LoadingModal from "../General/LoadingModal.vue";
 
 export default {
-    props: {
-        images: {
-            type: Array,
-            required: true
-        }
-    },
     data(){
         return {
             paginatedItems: null,
@@ -49,15 +43,22 @@ export default {
             isLoading: false
         }
     },
+    props: {
+        data: {
+            type: Array,
+            default: () => [],
+        },
+    },
     mounted(){
         this.paginateData(5);
         this.maxPages = this.paginatedItems.length;
+        console.log(this.data)
     },
     methods: {
         paginateData(pageSize) {
             this.paginatedItems = [];
-            for (let i = 0; i < this.images.length; i += pageSize) {
-                this.paginatedItems.push(this.images.slice(i, i + pageSize));
+            for (let i = 0; i < this.data.length; i += pageSize) {
+                this.paginatedItems.push(this.data.slice(i, i + pageSize));
             }
         },
         changeActivePage(pageNum){
