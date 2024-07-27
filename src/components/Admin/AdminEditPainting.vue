@@ -60,16 +60,22 @@
           </div>
         </div>
         <div class="button-group">
-          <button type="button" class="btn btn-danger" @click="deletePainting">Delete Painting</button>
+          <button type="button" class="btn btn-danger" @click="showYesNoModal">Delete Painting</button>
           <button type="button" class="btn btn-warning" @click="cancelEdit">Cancel</button>
         </div>
       </form>
     </div>
+    <!-- Modal -->
+    <PopUpModal v-if="showModal" :title="modalTitle" :message="modalMessage" @close="showModal = false" />
+    <!-- Yes/No Modal -->
+    <YesNoModal v-if="showDeleteModal" title="Confirm Deletion" message="Are you sure you want to delete this painting?" @yes="confirmDelete" @close="showDeleteModal = false" />
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import PopUpModal from "@/components/General/PopUpModal.vue";
+import YesNoModal from "@/components/General/YesNoModal.vue";
 
 export default {
   name: 'EditPaintingForm',
@@ -79,7 +85,12 @@ export default {
       selectedFiles: {
         link_1: null,
         link_2: null
-      }
+      },
+      showModal: false,
+      modalTitle: '',
+      modalMessage: '',
+      showDeleteModal: false,
+      ItemToDelete: null
     };
   },
   mounted() {
@@ -122,8 +133,14 @@ export default {
       })
       .then(response => {
         this.painting = response.data;
+        this.showModal = true;
+        this.modalTitle = 'Success';
+        this.modalMessage = `${field.charAt(0).toUpperCase() + field.slice(1)} updated successfully.`;
       })
       .catch(error => {
+        this.showModal = true;
+        this.modalTitle = 'Error';
+        this.modalMessage = `Failed to update ${field}.`;
         if (error.response.request.status === 401) {
           localStorage.setItem('DomiArt_token', null);
           this.$router.push('/admin/login');
@@ -150,10 +167,19 @@ export default {
       })
       .then(() => {
         this.fetchData();
+        this.showModal = true;
+        this.modalTitle = 'Success';
+        this.modalMessage = `${field === 'link_1' ? 'Primary' : 'Secondary'} image uploaded successfully.`;
       })
       .catch(error => {
+        this.showModal = true;
+        this.modalTitle = 'Error';
+        this.modalMessage = `Failed to upload ${field === 'link_1' ? 'Primary' : 'Secondary'} image.`;
         console.error('Error uploading file:', error);
       });
+    },
+    showYesNoModal(){
+      this.showDeleteModal = true;
     },
     deletePainting() {
       const paintingID = this.$route.params.id;
@@ -163,9 +189,15 @@ export default {
         }
       })
       .then(() => {
-
+        this.showModal = true;
+        this.modalTitle = 'Success';
+        this.modalMessage = 'Painting deleted successfully.';
+        this.$router.push('/admin');
       })
       .catch(error => {
+        this.showModal = true;
+        this.modalTitle = 'Error';
+        this.modalMessage = 'Failed to delete painting.';
         if (error.response.request.status === 401) {
           localStorage.setItem('DomiArt_token', null);
           this.$router.push('/admin/login');
@@ -173,10 +205,18 @@ export default {
         console.error('Error deleting painting:', error);
       });
     },
+    confirmDelete() {
+      this.deletePainting();
+      this.showDeleteModal = false;
+    },
     cancelEdit() {
       this.checkToken();
-      this.$router.push('/admin');
+      this.$router.push('/admin/images');
     }
+  },
+  components: {
+    PopUpModal,
+    YesNoModal
   }
 };
 </script>
@@ -184,7 +224,7 @@ export default {
 <style scoped>
 .containerOfAll {
   padding-top: 10vh;
-  padding-bottom:5vh;
+  padding-bottom: 5vh;
   width: 100vw;
   min-height: 120vh;
   display: flex;

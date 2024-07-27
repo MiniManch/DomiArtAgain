@@ -1,142 +1,162 @@
 <template>
-    <div class="containerOfAll">
-      <div class="edit-form-container">
-        <h2>Create New Painting</h2>
-        <form @submit.prevent="submitForm">
-          <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" id="title" v-model="painting.title" class="form-control" required />
-          </div>
-          <div class="form-group">
-            <label for="year">Year</label>
-            <input type="text" id="year" v-model="painting.year" class="form-control" required />
-          </div>
-          <div class="form-group">
-            <label for="text">Description</label>
-            <textarea id="text" v-model="painting.text" class="form-control" required></textarea>
-          </div>
-          <div class="form-group">
-            <label for="link_1">Primary Image</label>
-            <input type="file" id="link_1" @change="onFileChange($event, 'link_1')" class="form-control-file" required />
-          </div>
-          <div class="form-group">
-            <label for="link_2">Secondary Image</label>
-            <input type="file" id="link_2" @change="onFileChange($event, 'link_2')" class="form-control-file" required />
-          </div>
-          <button type="submit" class="btn btn-primary">Create Painting</button>
-          <button type="button" class="btn btn-warning" @click="cancelEdit">Cancel</button>
-        </form>
-      </div>
+  <div class="containerOfAll">
+    <div class="edit-form-container">
+      <h2>Create New Painting</h2>
+      <form @submit.prevent="submitForm">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" id="title" v-model="painting.title" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="year">Year</label>
+          <input type="text" id="year" v-model="painting.year" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="text">Description</label>
+          <textarea id="text" v-model="painting.text" class="form-control" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="link_1">Primary Image</label>
+          <input type="file" id="link_1" @change="onFileChange($event, 'link_1')" class="form-control-file" required />
+        </div>
+        <div class="form-group">
+          <label for="link_2">Secondary Image</label>
+          <input type="file" id="link_2" @change="onFileChange($event, 'link_2')" class="form-control-file" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Create Painting</button>
+        <button type="button" class="btn btn-warning" @click="cancelEdit">Cancel</button>
+      </form>
     </div>
-  </template>
-  
-  <script>
-  import axios from 'axios';
-  
-  export default {
-    name: 'CreatePaintingForm',
-    data() {
-      return {
-        painting: {
-          title: '',
-          year: '',
-          text: ''
-        },
-        selectedFiles: {
-          link_1: null,
-          link_2: null
-        }
-      };
-    },
-    methods: {
-      async checkToken() {
-        try {
-          await axios.get(`${process.env.VUE_APP_BACKEND_URL}/check-token`, {
-            headers: {
-              'Authorization': `Bearer ${localStorage.getItem('DomiArt_token')}`
-            }
-          });
-          return true;
-        } catch (error) {
-          if (error.response && error.response.status === 401) {
-            localStorage.setItem('DomiArt_token', null);
-            this.$router.push('/admin/login');
+    <!-- Modal -->
+    <PopUpModal v-if="showModal" :title="modalTitle" :message="modalMessage" @close="handleModalClose" />
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+import PopUpModal from '@/components/General/PopUpModal.vue';
+
+export default {
+  name: 'CreatePaintingForm',
+  data() {
+    return {
+      painting: {
+        title: '',
+        year: '',
+        text: ''
+      },
+      selectedFiles: {
+        link_1: null,
+        link_2: null
+      },
+      showModal: false,
+      modalTitle: '',
+      modalMessage: ''
+    };
+  },
+  methods: {
+    async checkToken() {
+      try {
+        await axios.get(`${process.env.VUE_APP_BACKEND_URL}/check-token`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('DomiArt_token')}`
           }
-          console.error('Error checking token:', error);
-          return false;
+        });
+        return true;
+      } catch (error) {
+        if (error.response && error.response.status === 401) {
+          localStorage.setItem('DomiArt_token', null);
+          this.$router.push('/admin/login');
         }
-      },
-      onFileChange(event, field) {
-        this.selectedFiles[field] = event.target.files[0];
-      },
-      async uploadFile(paintingID, field) {
-        const file = this.selectedFiles[field];
-        if (!file) return;
-  
-        const formData = new FormData();
-        formData.append('file', file);
-  
-        try {
-          const response = await axios.put(`${process.env.VUE_APP_BACKEND_URL}/image/${paintingID}/${field}`, formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-              'Authorization': `Bearer ${localStorage.getItem('DomiArt_token')}`
-            }
-          });
-          this.painting[field] = response.data[field];
-        } catch (error) {
-          console.error('Error uploading file:', error);
-        }
-      },
-      async submitForm() {
-        try {
-          const formData = new FormData();
-          formData.append('title', this.painting.title);
-          formData.append('year', this.painting.year);
-          formData.append('text', this.painting.text);
-          formData.append('link_1', this.selectedFiles.link_1);
-          formData.append('link_2', this.selectedFiles.link_2);
-  
-          await axios.post(`${process.env.VUE_APP_BACKEND_URL}/image`, formData, {
-            headers: {
-              'Authorization': `Bearer ${localStorage.getItem('DomiArt_token')}`
-            }
-          });
-        } catch (error) {
-          console.error('Error creating painting:', error);
-        }
-      },
-      cancelEdit() {
-        this.$router.push('/admin');
+        console.error('Error checking token:', error);
+        return false;
       }
+    },
+    onFileChange(event, field) {
+      this.selectedFiles[field] = event.target.files[0];
+    },
+    async uploadFile(paintingID, field) {
+      const file = this.selectedFiles[field];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const response = await axios.put(`${process.env.VUE_APP_BACKEND_URL}/image/${paintingID}/${field}`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${localStorage.getItem('DomiArt_token')}`
+          }
+        });
+        this.painting[field] = response.data[field];
+      } catch (error) {
+        console.error('Error uploading file:', error);
+      }
+    },
+    async submitForm() {
+      try {
+        const formData = new FormData();
+        formData.append('title', this.painting.title);
+        formData.append('year', this.painting.year);
+        formData.append('text', this.painting.text);
+        formData.append('link_1', this.selectedFiles.link_1);
+        formData.append('link_2', this.selectedFiles.link_2);
+
+        await axios.post(`${process.env.VUE_APP_BACKEND_URL}/image`, formData, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('DomiArt_token')}`
+          }
+        });
+        this.showModal = true;
+        this.modalTitle = 'Success';
+        this.modalMessage = 'Painting created successfully.';
+      } catch (error) {
+        this.showModal = true;
+        this.modalTitle = 'Error';
+        this.modalMessage = 'Failed to create painting.';
+        console.error('Error creating painting:', error);
+      }
+    },
+    handleModalClose() {
+      this.showModal = false;
+      if (this.modalTitle === 'Success') {
+        this.$router.push('/admin/images');
+      }
+    },
+    cancelEdit() {
+      this.$router.push('/admin');
     }
-  };
-  </script>
-  
-  <style scoped>
-  .containerOfAll {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  },
+  components: {
+    PopUpModal
   }
-  .edit-form-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background: #5e5343;
-    color: #EFE9E4;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 2vw;
-  }
-  .save-field {
-    margin-top: 10px;
-  }
-  </style>
-  
+};
+</script>
+
+<style scoped>
+.containerOfAll {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.edit-form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #5e5343;
+  color: #EFE9E4;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2vw;
+}
+.save-field {
+  margin-top: 10px;
+}
+</style>
