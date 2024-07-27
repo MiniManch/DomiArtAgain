@@ -71,7 +71,7 @@ export default {
       loading: false,
     };
   },
-  props: {
+  props: { 
     data: {
       type: Array,
       default: () => [],

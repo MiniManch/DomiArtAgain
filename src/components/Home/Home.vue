@@ -4,7 +4,7 @@
 
     <!-- Gallery -->
     <LandscapeGallery :data="data" v-if="isLandscape" />
-    <MobileGallery :data="data" v-else />
+    <MobileGallery :images="data" v-else />
 
     <!-- Contact -->
     <LandscapeContactPage v-if="isLandscape" />
