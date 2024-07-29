@@ -26,7 +26,7 @@ This made it difficult to adjust and change images on a whiff, as there is a nee
 Check out the live demo:
 - [Frontend on Netlify](https://domi-arts.com/)
 
-![App Screenshot]![image](https://github.com/user-attachments/assets/700b3360-651b-4ca9-b201-a1ea05118ce0)
+[image](https://github.com/user-attachments/assets/700b3360-651b-4ca9-b201-a1ea05118ce0)
 
 
 ## Features
