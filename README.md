@@ -47,5 +47,6 @@ Check out the live demo:
    ```bash
    git clone https://github.com/your-username/your-repo.git
 2. cd your-repo/frontend
-3.npm install
-4.npm run serve
+3. npm install
+4. npm run serve
+
